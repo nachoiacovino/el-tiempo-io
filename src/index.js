@@ -1,4 +1,5 @@
 import './index.scss';
+import '@elastic/eui/dist/eui_theme_light.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
