@@ -1,15 +1,15 @@
 import {
   CHANGE_SEARCH_FIELD,
-  REQUEST_MUNICIPALITIES_FAILED,
-  REQUEST_MUNICIPALITIES_PENDING,
-  REQUEST_MUNICIPALITIES_SUCCESS,
+  REQUEST_PROVINCES_FAILED,
+  REQUEST_PROVINCES_PENDING,
+  REQUEST_PROVINCES_SUCCESS,
 } from './constants';
 
 const initialStateSearch = {
   searchField: '',
 };
 
-export const searchMunicipalities = (
+export const searchProvinces = (
   state = initialStateSearch,
   { type, payload },
 ) => {
@@ -23,20 +23,20 @@ export const searchMunicipalities = (
 
 const initialStateRequest = {
   isPending: false,
-  municipalities: [],
+  provinces: [],
   error: '',
 };
 
-export const requestMunicipalities = (
+export const requestProvinces = (
   state = initialStateRequest,
   { type, payload },
 ) => {
   switch (type) {
-    case REQUEST_MUNICIPALITIES_PENDING:
+    case REQUEST_PROVINCES_PENDING:
       return { ...state, isPending: true };
-    case REQUEST_MUNICIPALITIES_SUCCESS:
-      return { ...state, municipalities: payload, isPending: false };
-    case REQUEST_MUNICIPALITIES_FAILED:
+    case REQUEST_PROVINCES_SUCCESS:
+      return { ...state, provinces: payload, isPending: false };
+    case REQUEST_PROVINCES_FAILED:
       return { ...state, error: payload, isPending: false };
     default:
       return state;
