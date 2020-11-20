@@ -1,5 +1,44 @@
+import { EuiCard } from '@elastic/eui';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setRequestProvinces, setSearchField } from './redux/actions';
+
 const App = () => {
-  return <div>hi</div>;
+  const [filteredProvinces, setFilteredProvinces] = useState([]);
+
+  const dispatch = useDispatch();
+  const searchField = useSelector(
+    ({ searchProvinces }) => searchProvinces.searchField,
+  );
+  const provinces = useSelector(
+    ({ requestProvinces }) => requestProvinces.provinces,
+  );
+  const isPending = useSelector(
+    ({ requestProvinces }) => requestProvinces.isPending,
+  );
+  const error = useSelector(({ requestProvinces }) => requestProvinces.error);
+
+  useEffect(() => dispatch(setRequestProvinces()), [dispatch]);
+  useEffect(() => {
+    setFilteredProvinces(
+      provinces.filter((province) =>
+        province.NOMBRE_PROVINCIA.toLowerCase().includes(
+          searchField.toLowerCase(),
+        ),
+      ),
+    );
+  }, [provinces, searchField]);
+
+  const onSearchChange = (e) => dispatch(setSearchField(e.target.value));
+
+  return (
+    <div>
+      {provinces.map((province) => (
+        <EuiCard title={province?.NOMBRE_PROVINCIA} description="description" />
+      ))}
+    </div>
+  );
 };
 
 export default App;
