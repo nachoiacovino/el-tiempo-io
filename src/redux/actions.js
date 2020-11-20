@@ -1,4 +1,4 @@
-import elTiempo from '../api/eltiempo';
+import elTiempo from '../api/elTiempo';
 import {
   CHANGE_SEARCH_FIELD,
   REQUEST_MUNICIPALITIES_FAILED,
