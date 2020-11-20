@@ -1,4 +1,4 @@
-import { EuiCard } from '@elastic/eui';
+import { EuiCard, EuiFlexGrid, EuiFlexItem } from '@elastic/eui';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -34,9 +34,16 @@ const App = () => {
 
   return (
     <div>
-      {provinces.map((province) => (
-        <EuiCard title={province?.NOMBRE_PROVINCIA} description="description" />
-      ))}
+      <EuiFlexGrid columns={3}>
+        {provinces.map((province) => (
+          <EuiFlexItem>
+            <EuiCard
+              title={province?.NOMBRE_PROVINCIA}
+              description="description"
+            />
+          </EuiFlexItem>
+        ))}
+      </EuiFlexGrid>
     </div>
   );
 };
