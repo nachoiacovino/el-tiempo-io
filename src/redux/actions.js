@@ -4,6 +4,7 @@ import {
   REQUEST_MUNICIPALITIES_FAILED,
   REQUEST_MUNICIPALITIES_PENDING,
   REQUEST_MUNICIPALITIES_SUCCESS,
+  SET_SELECTED_OPTION,
 } from './constants';
 
 export const setSearchField = (payload) => ({
@@ -26,3 +27,8 @@ export const setRequestMunicipalities = () => (dispatch) => {
   };
   return fetchData();
 };
+
+export const setSelectOption = (payload) => ({
+  type: SET_SELECTED_OPTION,
+  payload,
+});

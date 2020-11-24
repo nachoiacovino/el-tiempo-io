@@ -1,10 +1,17 @@
 import { EuiComboBox } from '@elastic/eui';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { setSelectOption } from '../../redux/actions';
 
 const SearchBar = ({ options }) => {
+  const dispatch = useDispatch();
   const [selectedOption, setSelected] = useState();
 
-  const onChange = (selectedOptions) => setSelected(selectedOptions);
+  const onChange = (selectedOption) => {
+    setSelected(selectedOption);
+    dispatch(setSelectOption(selectedOption));
+  };
 
   return (
     <EuiComboBox

@@ -14,6 +14,9 @@ const App = () => {
   const municipalities = useSelector(
     ({ requestMunicipalities }) => requestMunicipalities.municipalities,
   );
+  const selectedOption = useSelector(
+    ({ selectOption }) => selectOption.selectedOption,
+  );
   const isPending = useSelector(
     ({ requestMunicipalities }) => requestMunicipalities.isPending,
   );

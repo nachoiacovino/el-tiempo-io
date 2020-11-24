@@ -3,6 +3,7 @@ import {
   REQUEST_MUNICIPALITIES_FAILED,
   REQUEST_MUNICIPALITIES_PENDING,
   REQUEST_MUNICIPALITIES_SUCCESS,
+  SET_SELECTED_OPTION,
 } from './constants';
 
 const initialStateSearch = {
@@ -38,6 +39,19 @@ export const requestMunicipalities = (
       return { ...state, municipalities: payload, isPending: false };
     case REQUEST_MUNICIPALITIES_FAILED:
       return { ...state, error: payload, isPending: false };
+    default:
+      return state;
+  }
+};
+
+const initialOption = {
+  selectedOption: [],
+};
+
+export const selectOption = (state = initialOption, { type, payload }) => {
+  switch (type) {
+    case SET_SELECTED_OPTION:
+      return { ...state, selectedOption: payload };
     default:
       return state;
   }
