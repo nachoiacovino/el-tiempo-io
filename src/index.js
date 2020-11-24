@@ -9,13 +9,13 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 import App from './App';
-import { requestProvinces, searchProvinces } from './redux/reducers';
+import { requestMunicipalities, searchMunicipalities } from './redux/reducers';
 import reportWebVitals from './reportWebVitals';
 
 const logger = createLogger();
 const rootReducer = combineReducers({
-  searchProvinces,
-  requestProvinces,
+  searchMunicipalities,
+  requestMunicipalities,
 });
 
 const store = createStore(

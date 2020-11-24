@@ -2,43 +2,45 @@ import { EuiCard, EuiFlexGrid, EuiFlexItem } from '@elastic/eui';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setRequestProvinces, setSearchField } from './redux/actions';
+import { setRequestMunicipalities, setSearchField } from './redux/actions';
 
 const App = () => {
-  const [filteredProvinces, setFilteredProvinces] = useState([]);
+  const [filteredMunicipalities, setFilteredMunicipalities] = useState([]);
 
   const dispatch = useDispatch();
   const searchField = useSelector(
-    ({ searchProvinces }) => searchProvinces.searchField,
+    ({ searchMunicipalities }) => searchMunicipalities.searchField,
   );
-  const provinces = useSelector(
-    ({ requestProvinces }) => requestProvinces.provinces,
+  const municipalities = useSelector(
+    ({ requestMunicipalities }) => requestMunicipalities.municipalities,
   );
   const isPending = useSelector(
-    ({ requestProvinces }) => requestProvinces.isPending,
+    ({ requestMunicipalities }) => requestMunicipalities.isPending,
   );
-  const error = useSelector(({ requestProvinces }) => requestProvinces.error);
+  const error = useSelector(
+    ({ requestMunicipalities }) => requestMunicipalities.error,
+  );
 
-  useEffect(() => dispatch(setRequestProvinces()), [dispatch]);
+  useEffect(() => dispatch(setRequestMunicipalities()), [dispatch]);
   useEffect(() => {
-    setFilteredProvinces(
-      provinces.filter((province) =>
-        province.NOMBRE_PROVINCIA.toLowerCase().includes(
+    setFilteredMunicipalities(
+      municipalities.filter((municipality) =>
+        municipality.NOMBRE_PROVINCIA.toLowerCase().includes(
           searchField.toLowerCase(),
         ),
       ),
     );
-  }, [provinces, searchField]);
+  }, [municipalities, searchField]);
 
   const onSearchChange = (e) => dispatch(setSearchField(e.target.value));
 
   return (
     <div>
       <EuiFlexGrid columns={3}>
-        {provinces.map((province) => (
-          <EuiFlexItem>
+        {municipalities.map((municipality) => (
+          <EuiFlexItem key={municipality.ID_REL}>
             <EuiCard
-              title={province?.NOMBRE_PROVINCIA}
+              title={municipality?.NOMBRE_PROVINCIA}
               description="description"
             />
           </EuiFlexItem>

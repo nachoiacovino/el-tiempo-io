@@ -1,9 +1,9 @@
 import elTiempo from '../api/elTiempo';
 import {
   CHANGE_SEARCH_FIELD,
-  REQUEST_PROVINCES_FAILED,
-  REQUEST_PROVINCES_PENDING,
-  REQUEST_PROVINCES_SUCCESS,
+  REQUEST_MUNICIPALITIES_FAILED,
+  REQUEST_MUNICIPALITIES_PENDING,
+  REQUEST_MUNICIPALITIES_SUCCESS,
 } from './constants';
 
 export const setSearchField = (payload) => ({
@@ -11,17 +11,17 @@ export const setSearchField = (payload) => ({
   payload,
 });
 
-export const setRequestProvinces = () => (dispatch) => {
-  dispatch({ type: REQUEST_PROVINCES_PENDING });
+export const setRequestMunicipalities = () => (dispatch) => {
+  dispatch({ type: REQUEST_MUNICIPALITIES_PENDING });
   const fetchData = async () => {
     try {
-      const res = await elTiempo.get('provincias');
+      const res = await elTiempo.get('municipios');
       dispatch({
-        type: REQUEST_PROVINCES_SUCCESS,
-        payload: res.data.provincias,
+        type: REQUEST_MUNICIPALITIES_SUCCESS,
+        payload: res.data,
       });
     } catch (error) {
-      dispatch({ type: REQUEST_PROVINCES_FAILED, payload: error });
+      dispatch({ type: REQUEST_MUNICIPALITIES_FAILED, payload: error });
     }
   };
   return fetchData();

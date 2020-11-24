@@ -1,13 +1,13 @@
 import configureStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
 
-import { setRequestProvinces, setSearchField } from './actions';
-import { CHANGE_SEARCH_FIELD, REQUEST_PROVINCES_PENDING } from './constants';
+import { setRequestMunicipalities, setSearchField } from './actions';
+import { CHANGE_SEARCH_FIELD, REQUEST_MUNICIPALITIES_PENDING } from './constants';
 
 const mockStore = configureStore([thunkMiddleware]);
 
 describe('setSearchField', () => {
-  it('should create an action to search provinces', () => {
+  it('should create an action to search municipalities', () => {
     const text = 'woo';
     const expectedAction = {
       type: CHANGE_SEARCH_FIELD,
@@ -17,15 +17,15 @@ describe('setSearchField', () => {
   });
 });
 
-describe('setRequestProvinces', () => {
+describe('setRequestMunicipalities', () => {
   const store = mockStore();
 
-  it('handles requesting provinces from API', async () => {
-    await store.dispatch(setRequestProvinces());
+  it('handles requesting municipalities from API', async () => {
+    await store.dispatch(setRequestMunicipalities());
     const actions = store.getActions();
 
     const expectedAction = {
-      type: REQUEST_PROVINCES_PENDING,
+      type: REQUEST_MUNICIPALITIES_PENDING,
     };
     expect(actions[0]).toEqual(expectedAction);
   });
