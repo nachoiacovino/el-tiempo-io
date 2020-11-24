@@ -45,13 +45,13 @@ export const requestMunicipalities = (
 };
 
 const initialOption = {
-  selectedOption: [],
+  selectedOption: null,
 };
 
 export const selectOption = (state = initialOption, { type, payload }) => {
   switch (type) {
     case SET_SELECTED_OPTION:
-      return { ...state, selectedOption: payload };
+      return { ...state, selectedOption: payload[0] };
     default:
       return state;
   }
