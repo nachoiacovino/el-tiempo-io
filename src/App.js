@@ -1,11 +1,11 @@
-import { EuiCard, EuiFlexGrid, EuiFlexItem } from '@elastic/eui';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import SearchBar from './components/SearchBar/SearchBar';
 import { setRequestMunicipalities, setSearchField } from './redux/actions';
 
 const App = () => {
-  const [filteredMunicipalities, setFilteredMunicipalities] = useState([]);
+  const [options, setOptions] = useState([]);
 
   const dispatch = useDispatch();
   const searchField = useSelector(
@@ -22,21 +22,22 @@ const App = () => {
   );
 
   useEffect(() => dispatch(setRequestMunicipalities()), [dispatch]);
+
   useEffect(() => {
-    setFilteredMunicipalities(
-      municipalities.filter((municipality) =>
-        municipality.NOMBRE_PROVINCIA.toLowerCase().includes(
-          searchField.toLowerCase(),
-        ),
-      ),
+    setOptions(
+      municipalities.map((option) => {
+        option.label = option.NOMBRE_CAPITAL;
+        return option;
+      }),
     );
-  }, [municipalities, searchField]);
+  }, [municipalities]);
 
   const onSearchChange = (e) => dispatch(setSearchField(e.target.value));
 
   return (
     <div>
-      <EuiFlexGrid columns={3}>
+      <SearchBar options={options} />
+      {/*       <EuiFlexGrid columns={3}>
         {municipalities.map((municipality) => (
           <EuiFlexItem key={municipality.ID_REL}>
             <EuiCard
@@ -45,7 +46,7 @@ const App = () => {
             />
           </EuiFlexItem>
         ))}
-      </EuiFlexGrid>
+      </EuiFlexGrid> */}
     </div>
   );
 };
