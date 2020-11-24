@@ -3,7 +3,9 @@ import {
   REQUEST_MUNICIPALITIES_FAILED,
   REQUEST_MUNICIPALITIES_PENDING,
   REQUEST_MUNICIPALITIES_SUCCESS,
-  SET_SELECTED_OPTION,
+  REQUEST_SELECTED_FAILED,
+  REQUEST_SELECTED_PENDING,
+  REQUEST_SELECTED_SUCCESS,
 } from './constants';
 
 const initialStateSearch = {
@@ -44,14 +46,23 @@ export const requestMunicipalities = (
   }
 };
 
-const initialOption = {
-  selectedOption: null,
+const initialStateSelected = {
+  isPending: false,
+  selected: null,
+  error: '',
 };
 
-export const selectOption = (state = initialOption, { type, payload }) => {
+export const requestSelected = (
+  state = initialStateSelected,
+  { type, payload },
+) => {
   switch (type) {
-    case SET_SELECTED_OPTION:
-      return { ...state, selectedOption: payload[0] };
+    case REQUEST_SELECTED_PENDING:
+      return { ...state, isPending: true };
+    case REQUEST_SELECTED_SUCCESS:
+      return { ...state, selected: payload, isPending: false };
+    case REQUEST_SELECTED_FAILED:
+      return { ...state, error: payload, isPending: false };
     default:
       return state;
   }

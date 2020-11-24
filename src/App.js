@@ -15,8 +15,8 @@ const App = () => {
   const municipalities = useSelector(
     ({ requestMunicipalities }) => requestMunicipalities.municipalities,
   );
-  const selectedOption = useSelector(
-    ({ selectOption }) => selectOption.selectedOption,
+  const selected = useSelector(
+    ({ requestSelected }) => requestSelected.selected,
   );
   const isPending = useSelector(
     ({ requestMunicipalities }) => requestMunicipalities.isPending,
@@ -41,12 +41,17 @@ const App = () => {
   return (
     <div>
       <SearchBar options={options} />
-      {selectedOption && (
+      {selected && (
         <EuiFlexGrid columns={3}>
-          <EuiFlexItem key={selectedOption?.ID_REL}>
+          <EuiFlexItem key={selected.ID_REL}>
             <EuiCard
-              title={selectedOption?.NOMBRE_CAPITAL}
-              description="description"
+              title={selected.municipio.NOMBRE_CAPITAL}
+              description={
+                <div>
+                  Temperatura actual: {selected.temperatura_actual}.
+                  Probabilidad de lluvia: {selected.lluvia}
+                </div>
+              }
             />
           </EuiFlexItem>
         </EuiFlexGrid>

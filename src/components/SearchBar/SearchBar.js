@@ -2,7 +2,7 @@ import { EuiComboBox } from '@elastic/eui';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setSelectOption } from '../../redux/actions';
+import { setRequestSelected } from '../../redux/actions';
 
 const SearchBar = ({ options }) => {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const SearchBar = ({ options }) => {
 
   const onChange = (selectedOption) => {
     setSelected(selectedOption);
-    dispatch(setSelectOption(selectedOption));
+    dispatch(setRequestSelected(selectedOption));
   };
 
   return (
