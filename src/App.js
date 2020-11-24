@@ -1,3 +1,4 @@
+import { EuiCard, EuiFlexGrid, EuiFlexItem } from '@elastic/eui';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -40,16 +41,16 @@ const App = () => {
   return (
     <div>
       <SearchBar options={options} />
-      {/*       <EuiFlexGrid columns={3}>
-        {municipalities.map((municipality) => (
-          <EuiFlexItem key={municipality.ID_REL}>
+      {selectedOption && (
+        <EuiFlexGrid columns={3}>
+          <EuiFlexItem key={selectedOption?.ID_REL}>
             <EuiCard
-              title={municipality?.NOMBRE_PROVINCIA}
+              title={selectedOption?.NOMBRE_CAPITAL}
               description="description"
             />
           </EuiFlexItem>
-        ))}
-      </EuiFlexGrid> */}
+        </EuiFlexGrid>
+      )}
     </div>
   );
 };
