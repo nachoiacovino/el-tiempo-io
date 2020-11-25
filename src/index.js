@@ -9,7 +9,7 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 import App from './App';
-import { requestMunicipalities, requestSelected, searchMunicipalities } from './redux/reducers';
+import { requestMunicipalities, requestSaved, requestSelected, searchMunicipalities } from './redux/reducers';
 import reportWebVitals from './reportWebVitals';
 
 const logger = createLogger();
@@ -17,6 +17,7 @@ const rootReducer = combineReducers({
   searchMunicipalities,
   requestMunicipalities,
   requestSelected,
+  requestSaved,
 });
 
 const store = createStore(

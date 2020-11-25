@@ -49,3 +49,7 @@ export const setRequestSelected = (payload) => (dispatch) => {
   };
   return fetchData();
 };
+
+export const setRequestSaved = () => {
+  //
+};
