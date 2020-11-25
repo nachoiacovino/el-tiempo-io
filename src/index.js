@@ -5,34 +5,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import { createLogger } from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import App from './App';
-import { currentUser, requestMunicipalities, requestSaved, requestSelected } from './redux/reducers';
+import { persistor, store } from './redux/store';
 import reportWebVitals from './reportWebVitals';
-
-const logger = createLogger();
-const rootReducer = combineReducers({
-  requestMunicipalities,
-  requestSelected,
-  requestSaved,
-  currentUser,
-});
-
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunkMiddleware, logger),
-);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Provider>
+    </BrowserRouter>
     ,
   </React.StrictMode>,
   document.getElementById('root'),

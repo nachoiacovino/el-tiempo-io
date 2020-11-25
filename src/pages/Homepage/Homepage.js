@@ -37,7 +37,7 @@ const Homepage = () => {
   }, [municipalities]);
 
   return (
-    <div class="Homepage">
+    <div className="Homepage">
       <EuiSpacer />
       <Link to="signin">Sign In</Link>
       <EuiSpacer />
