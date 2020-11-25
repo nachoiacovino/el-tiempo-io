@@ -1,21 +1,10 @@
 import configureStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
 
-import { setRequestMunicipalities, setSearchField } from './actions';
-import { CHANGE_SEARCH_FIELD, REQUEST_MUNICIPALITIES_PENDING } from './constants';
+import { setRequestMunicipalities } from './actions';
+import { REQUEST_MUNICIPALITIES_PENDING } from './constants';
 
 const mockStore = configureStore([thunkMiddleware]);
-
-describe('setSearchField', () => {
-  it('should create an action to search municipalities', () => {
-    const text = 'woo';
-    const expectedAction = {
-      type: CHANGE_SEARCH_FIELD,
-      payload: text,
-    };
-    expect(setSearchField(text)).toEqual(expectedAction);
-  });
-});
 
 describe('setRequestMunicipalities', () => {
   const store = mockStore();

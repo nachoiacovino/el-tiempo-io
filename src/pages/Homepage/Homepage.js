@@ -5,15 +5,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { setRequestMunicipalities, setSearchField } from '../../redux/actions';
+import { setRequestMunicipalities } from '../../redux/actions';
 
 const Homepage = () => {
   const [options, setOptions] = useState([]);
 
   const dispatch = useDispatch();
-  const searchField = useSelector(
-    ({ searchMunicipalities }) => searchMunicipalities.searchField,
-  );
   const municipalities = useSelector(
     ({ requestMunicipalities }) => requestMunicipalities.municipalities,
   );
@@ -38,7 +35,6 @@ const Homepage = () => {
     );
   }, [municipalities]);
 
-  const onSearchChange = (e) => dispatch(setSearchField(e.target.value));
   return (
     <div>
       <SearchBar options={options} />

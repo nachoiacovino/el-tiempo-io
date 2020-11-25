@@ -1,6 +1,5 @@
 import elTiempo from '../api/elTiempo';
 import {
-  CHANGE_SEARCH_FIELD,
   REQUEST_MUNICIPALITIES_FAILED,
   REQUEST_MUNICIPALITIES_PENDING,
   REQUEST_MUNICIPALITIES_SUCCESS,
@@ -8,11 +7,6 @@ import {
   REQUEST_SELECTED_PENDING,
   REQUEST_SELECTED_SUCCESS,
 } from './constants';
-
-export const setSearchField = (payload) => ({
-  type: CHANGE_SEARCH_FIELD,
-  payload,
-});
 
 export const setRequestMunicipalities = () => (dispatch) => {
   dispatch({ type: REQUEST_MUNICIPALITIES_PENDING });

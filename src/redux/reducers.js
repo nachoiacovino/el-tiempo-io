@@ -1,5 +1,4 @@
 import {
-  CHANGE_SEARCH_FIELD,
   REQUEST_MUNICIPALITIES_FAILED,
   REQUEST_MUNICIPALITIES_PENDING,
   REQUEST_MUNICIPALITIES_SUCCESS,
@@ -10,22 +9,6 @@ import {
   REQUEST_SELECTED_PENDING,
   REQUEST_SELECTED_SUCCESS,
 } from './constants';
-
-const initialStateSearch = {
-  searchField: '',
-};
-
-export const searchMunicipalities = (
-  state = initialStateSearch,
-  { type, payload },
-) => {
-  switch (type) {
-    case CHANGE_SEARCH_FIELD:
-      return { ...state, searchField: payload };
-    default:
-      return state;
-  }
-};
 
 const initialStateRequest = {
   isPending: false,
