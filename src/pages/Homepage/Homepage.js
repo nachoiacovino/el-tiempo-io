@@ -1,8 +1,9 @@
 import './Homepage.scss';
 
-import { EuiCard, EuiFlexGrid, EuiFlexItem } from '@elastic/eui';
+import { EuiCard, EuiFlexGrid, EuiFlexItem, EuiSpacer } from '@elastic/eui';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { setRequestMunicipalities } from '../../redux/actions';
@@ -36,7 +37,10 @@ const Homepage = () => {
   }, [municipalities]);
 
   return (
-    <div>
+    <div class="Homepage">
+      <EuiSpacer />
+      <Link to="signin">Sign In</Link>
+      <EuiSpacer />
       <SearchBar options={options} />
       {selected && (
         <EuiFlexGrid columns={3}>
