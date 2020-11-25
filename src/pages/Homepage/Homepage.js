@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { setRequestMunicipalities } from '../../redux/actions';
+import { setRequestMnpsStart } from '../../redux/actions';
 
 const Homepage = () => {
   const [options, setOptions] = useState([]);
@@ -25,7 +25,7 @@ const Homepage = () => {
     ({ requestMunicipalities }) => requestMunicipalities.error,
   );
 
-  useEffect(() => dispatch(setRequestMunicipalities()), [dispatch]);
+  useEffect(() => dispatch(setRequestMnpsStart()), [dispatch]);
 
   useEffect(() => {
     setOptions(

@@ -1,8 +1,6 @@
 import elTiempo from '../api/elTiempo';
 import {
-  REQUEST_MUNICIPALITIES_FAILED,
   REQUEST_MUNICIPALITIES_PENDING,
-  REQUEST_MUNICIPALITIES_SUCCESS,
   REQUEST_SELECTED_FAILED,
   REQUEST_SELECTED_PENDING,
   REQUEST_SELECTED_SUCCESS,
@@ -14,20 +12,8 @@ export const setCurrentUser = (user) => ({
   payload: user,
 });
 
-export const setRequestMunicipalities = () => (dispatch) => {
+export const setRequestMnpsStart = () => (dispatch) => {
   dispatch({ type: REQUEST_MUNICIPALITIES_PENDING });
-  const fetchData = async () => {
-    try {
-      const res = await elTiempo.get('municipios');
-      dispatch({
-        type: REQUEST_MUNICIPALITIES_SUCCESS,
-        payload: res.data,
-      });
-    } catch (error) {
-      dispatch({ type: REQUEST_MUNICIPALITIES_FAILED, payload: error });
-    }
-  };
-  return fetchData();
 };
 
 export const setRequestSelected = (payload) => (dispatch) => {
