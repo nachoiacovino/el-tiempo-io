@@ -8,7 +8,24 @@ import {
   REQUEST_SELECTED_FAILED,
   REQUEST_SELECTED_PENDING,
   REQUEST_SELECTED_SUCCESS,
+  SET_CURRENT_USER,
 } from './constants';
+
+const initialStateUser = {
+  currentUser: null,
+};
+
+export const currentUser = (state = initialStateUser, action) => {
+  switch (action.type) {
+    case SET_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
 const initialStateRequest = {
   isPending: false,

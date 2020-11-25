@@ -6,7 +6,13 @@ import {
   REQUEST_SELECTED_FAILED,
   REQUEST_SELECTED_PENDING,
   REQUEST_SELECTED_SUCCESS,
+  SET_CURRENT_USER,
 } from './constants';
+
+export const setCurrentUser = (user) => ({
+  type: SET_CURRENT_USER,
+  payload: user,
+});
 
 export const setRequestMunicipalities = () => (dispatch) => {
   dispatch({ type: REQUEST_MUNICIPALITIES_PENDING });
