@@ -30,7 +30,7 @@ export const currentUser = (state = initialStateUser, action) => {
 const initialStateRequest = {
   isPending: false,
   municipalities: [],
-  error: '',
+  error: null,
 };
 
 export const requestMunicipalities = (
@@ -41,7 +41,12 @@ export const requestMunicipalities = (
     case REQUEST_MUNICIPALITIES_PENDING:
       return { ...state, isPending: true };
     case REQUEST_MUNICIPALITIES_SUCCESS:
-      return { ...state, municipalities: payload, isPending: false };
+      return {
+        ...state,
+        municipalities: payload,
+        error: null,
+        isPending: false,
+      };
     case REQUEST_MUNICIPALITIES_FAILED:
       return { ...state, error: payload, isPending: false };
     default:
@@ -52,7 +57,7 @@ export const requestMunicipalities = (
 const initialStateSelected = {
   isPending: false,
   selected: null,
-  error: '',
+  error: null,
 };
 
 export const requestSelected = (
@@ -63,7 +68,7 @@ export const requestSelected = (
     case REQUEST_SELECTED_PENDING:
       return { ...state, isPending: true };
     case REQUEST_SELECTED_SUCCESS:
-      return { ...state, selected: payload, isPending: false };
+      return { ...state, selected: payload, error: null, isPending: false };
     case REQUEST_SELECTED_FAILED:
       return { ...state, error: payload, isPending: false };
     default:
@@ -74,7 +79,7 @@ export const requestSelected = (
 const initialStateSaved = {
   isPending: false,
   saved: null,
-  error: '',
+  error: null,
 };
 
 export const requestSaved = (state = initialStateSaved, { type, payload }) => {
@@ -82,7 +87,7 @@ export const requestSaved = (state = initialStateSaved, { type, payload }) => {
     case REQUEST_SAVED_PENDING:
       return { ...state, isPending: true };
     case REQUEST_SAVED_SUCCESS:
-      return { ...state, saved: payload, isPending: false };
+      return { ...state, saved: payload, error: null, isPending: false };
     case REQUEST_SAVED_FAILED:
       return { ...state, error: payload, isPending: false };
     default:
