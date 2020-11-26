@@ -16,7 +16,7 @@ export const setRequestMnpsStart = () => (dispatch) => {
   dispatch({ type: REQUEST_MUNICIPALITIES_PENDING });
 };
 
-export const setRequestSelected = (payload) => (dispatch) => {
+export const setRequestSelectedStart = (payload) => (dispatch) => {
   dispatch({ type: REQUEST_SELECTED_PENDING });
   const fetchData = async () => {
     try {

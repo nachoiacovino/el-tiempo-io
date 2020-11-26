@@ -5,7 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 import thunkMiddleware from 'redux-thunk';
 
 import rootReducer from './rootReducer';
-import { setRequestMunicipalities } from './sagas';
+import rootSaga from './rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [thunkMiddleware, sagaMiddleware];
@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
-sagaMiddleware.run(setRequestMunicipalities);
+sagaMiddleware.run(rootSaga);
 
 const persistor = persistStore(store);
 
