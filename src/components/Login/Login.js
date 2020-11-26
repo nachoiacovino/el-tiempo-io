@@ -61,7 +61,7 @@ const Login = () => {
             </EuiButton>
           </EuiFlexItem>
           <EuiFlexItem>
-            <EuiButton fill onClick={signInWithGoogle}>
+            <EuiButton fill type="button" onClick={signInWithGoogle}>
               Sign in with Google
             </EuiButton>
           </EuiFlexItem>
