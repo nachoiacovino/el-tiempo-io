@@ -87,7 +87,7 @@ export const setPinned = (state = initialStatePinned, { type, payload }) => {
     case PIN_MUNICIPALITY:
       return {
         ...state,
-        municipalities: [...state.municipalities, { ...payload }],
+        municipalities: [{ ...payload }, ...state.municipalities],
       };
     case UNPIN_MUNICIPALITY:
       return {
