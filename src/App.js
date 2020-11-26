@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
@@ -10,6 +10,7 @@ import { setCurrentUser } from './redux/actions';
 
 const App = () => {
   const dispatch = useDispatch();
+  const currentUser = useSelector(({ user }) => user.currentUser);
 
   useEffect(() => {
     let unsuscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -28,7 +29,11 @@ const App = () => {
       <Header />
       <Switch>
         <Route exact path="/" component={Homepage} />
-        <Route exact path="/signin" component={SignIn} />
+        <Route
+          exact
+          path="/signin"
+          render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
+        />
       </Switch>
     </>
   );
