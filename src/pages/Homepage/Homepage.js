@@ -3,7 +3,6 @@ import './Homepage.scss';
 import { EuiFlexGrid, EuiSpacer } from '@elastic/eui';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import Card from '../../components/Card/Card';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -41,8 +40,6 @@ const Homepage = () => {
 
   return (
     <div className="Homepage">
-      <EuiSpacer />
-      <Link to="signin">Sign In</Link>
       <EuiSpacer />
       <SearchBar options={options} />
       <EuiFlexGrid columns={3}>
