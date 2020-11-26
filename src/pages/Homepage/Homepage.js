@@ -1,12 +1,13 @@
 import './Homepage.scss';
 
-import { EuiButton, EuiCard, EuiFlexGrid, EuiFlexItem, EuiSpacer } from '@elastic/eui';
+import { EuiFlexGrid, EuiSpacer } from '@elastic/eui';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import Card from '../../components/Card/Card';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { pinMunicipality, setRequestMnpsStart, unpinMunicipality } from '../../redux/actions';
+import { setRequestMnpsStart } from '../../redux/actions';
 
 const Homepage = () => {
   const [options, setOptions] = useState([]);
@@ -37,11 +38,6 @@ const Homepage = () => {
     );
   }, [municipalities]);
 
-  const handlePin = (action, selected) => {
-    if (action === 'PIN') dispatch(pinMunicipality(selected));
-    else if (action === 'UNPIN') dispatch(unpinMunicipality(selected));
-  };
-
   return (
     <div className="Homepage">
       <EuiSpacer />
@@ -50,32 +46,7 @@ const Homepage = () => {
       <SearchBar options={options} />
       {selected && (
         <EuiFlexGrid columns={3}>
-          <EuiFlexItem key={selected.ID_REL}>
-            <EuiCard
-              title={selected.municipio.NOMBRE_CAPITAL}
-              description={
-                <>
-                  Temperatura actual: {selected.temperatura_actual}.
-                  Probabilidad de lluvia: {selected.lluvia}
-                  <EuiSpacer />
-                  <EuiButton
-                    type="EuiButton"
-                    fill
-                    onClick={() => handlePin('PIN', selected)}
-                  >
-                    Guardar búsqueda
-                  </EuiButton>
-                  <EuiButton
-                    type="EuiButton"
-                    fill
-                    onClick={() => handlePin('UNPIN', selected)}
-                  >
-                    Eliminar búsqueda
-                  </EuiButton>
-                </>
-              }
-            />
-          </EuiFlexItem>
+          <Card mnp={selected} />
         </EuiFlexGrid>
       )}
     </div>
