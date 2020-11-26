@@ -19,6 +19,7 @@ const Homepage = () => {
   const selected = useSelector(
     ({ requestSelected }) => requestSelected.selected,
   );
+  const pinned = useSelector(({ pinned }) => pinned.municipalities);
   const isPending = useSelector(
     ({ requestMunicipalities }) => requestMunicipalities.isPending,
   );
@@ -44,11 +45,12 @@ const Homepage = () => {
       <Link to="signin">Sign In</Link>
       <EuiSpacer />
       <SearchBar options={options} />
-      {selected && (
-        <EuiFlexGrid columns={3}>
-          <Card mnp={selected} />
-        </EuiFlexGrid>
-      )}
+      <EuiFlexGrid columns={3}>
+        {pinned.map((mnp) => (
+          <Card key={mnp.municipio.ID_REL} mnp={mnp} />
+        ))}
+        {selected && <Card mnp={selected} />}
+      </EuiFlexGrid>
     </div>
   );
 };

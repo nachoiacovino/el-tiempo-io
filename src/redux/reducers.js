@@ -1,4 +1,5 @@
 import {
+  CLEAR_SELECTED,
   PIN_MUNICIPALITY,
   REQUEST_MUNICIPALITIES_FAILED,
   REQUEST_MUNICIPALITIES_PENDING,
@@ -70,6 +71,8 @@ export const requestSelected = (
       return { ...state, selected: payload, error: null, isPending: false };
     case REQUEST_SELECTED_FAILED:
       return { ...state, error: payload, isPending: false };
+    case CLEAR_SELECTED:
+      return { ...state, selected: null, error: null, isPending: false };
     default:
       return state;
   }

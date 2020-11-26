@@ -1,4 +1,5 @@
 import {
+  CLEAR_SELECTED,
   PIN_MUNICIPALITY,
   REQUEST_MUNICIPALITIES_PENDING,
   REQUEST_SELECTED_PENDING,
@@ -18,6 +19,10 @@ export const setRequestMnpsStart = () => ({
 export const setRequestSelectedStart = (payload) => ({
   type: REQUEST_SELECTED_PENDING,
   payload,
+});
+
+export const clearSelected = () => ({
+  type: CLEAR_SELECTED,
 });
 
 export const pinMunicipality = (payload) => ({

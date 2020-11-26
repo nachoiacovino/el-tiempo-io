@@ -2,6 +2,8 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 import elTiempo from '../api/elTiempo';
 import {
+  CLEAR_SELECTED,
+  PIN_MUNICIPALITY,
   REQUEST_MUNICIPALITIES_FAILED,
   REQUEST_MUNICIPALITIES_PENDING,
   REQUEST_MUNICIPALITIES_SUCCESS,
@@ -22,10 +24,6 @@ function* setRequestMnpsAsync() {
   }
 }
 
-export function* setRequestMunicipalities() {
-  yield takeLatest(REQUEST_MUNICIPALITIES_PENDING, setRequestMnpsAsync);
-}
-
 function* setRequestSelectedAsync({ payload }) {
   try {
     const res = yield elTiempo.get(
@@ -43,6 +41,18 @@ function* setRequestSelectedAsync({ payload }) {
   }
 }
 
+function* clearSelected() {
+  yield put({ type: CLEAR_SELECTED });
+}
+
+export function* setRequestMunicipalities() {
+  yield takeLatest(REQUEST_MUNICIPALITIES_PENDING, setRequestMnpsAsync);
+}
+
 export function* setRequestSelected() {
   yield takeLatest(REQUEST_SELECTED_PENDING, setRequestSelectedAsync);
+}
+
+export function* watchPin() {
+  yield takeLatest(PIN_MUNICIPALITY, clearSelected);
 }
