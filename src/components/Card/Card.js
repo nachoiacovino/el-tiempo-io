@@ -1,6 +1,6 @@
 import './Card.scss';
 
-import { EuiButton, EuiCard, EuiFlexItem, EuiIcon, EuiSpacer } from '@elastic/eui';
+import { EuiButtonIcon, EuiCard, EuiFlexItem } from '@elastic/eui';
 import { useDispatch } from 'react-redux';
 
 import { pinMunicipality, unpinMunicipality } from '../../redux/actions';
@@ -14,26 +14,31 @@ const Card = ({ mnp, pinned }) => {
   };
 
   const buttonToShow = pinned ? (
-    <EuiButton type="EuiButton" fill onClick={() => handlePin('UNPIN', mnp)}>
-      Eliminar búsqueda
-    </EuiButton>
+    <EuiButtonIcon
+      iconType="pinFilled"
+      aria-label="Eliminar"
+      onClick={() => handlePin('UNPIN', mnp)}
+    />
   ) : (
-    <EuiButton type="EuiButton" fill onClick={() => handlePin('PIN', mnp)}>
-      Guardar búsqueda
-    </EuiButton>
+    <EuiButtonIcon
+      iconType="pin"
+      aria-label="Guardar"
+      onClick={() => handlePin('PIN', mnp)}
+    />
   );
 
   return (
     <EuiFlexItem>
       <EuiCard
-        title={mnp.municipio.NOMBRE_CAPITAL}
+        title={
+          <>
+            {mnp.municipio.NOMBRE_CAPITAL} {buttonToShow}
+          </>
+        }
         description={
           <>
             Temperatura actual: {mnp.temperatura_actual}. Probabilidad de
             lluvia: {mnp.lluvia}
-            <EuiSpacer />
-            <EuiIcon type="pin" />
-            {buttonToShow}
           </>
         }
       />
