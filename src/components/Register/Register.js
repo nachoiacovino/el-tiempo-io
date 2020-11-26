@@ -15,7 +15,7 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Password don't match");
+      alert('Las contraseñas no coinciden.');
       return;
     }
 
@@ -33,13 +33,13 @@ const Register = () => {
   return (
     <div className="Register">
       <EuiForm component="form" onSubmit={handleSubmit}>
-        <EuiFormRow label="Name">
+        <EuiFormRow label="Nombre">
           <EuiFieldText
-            placeholder="Name"
+            placeholder="Nombre"
             value={displayName}
             prepend={<EuiIcon type="user" />}
             onChange={setDisplayName}
-            aria-label="Email"
+            aria-label="Nombre"
           />
         </EuiFormRow>
         <EuiFormRow label="Email">
@@ -51,27 +51,27 @@ const Register = () => {
             aria-label="Email"
           />
         </EuiFormRow>
-        <EuiFormRow label="Password">
+        <EuiFormRow label="Contraseña">
           <EuiFieldPassword
-            placeholder="Password"
+            placeholder="Contraseña"
             value={password}
             onChange={setPassword}
-            aria-label="Password"
+            aria-label="Contraseña"
           />
         </EuiFormRow>
-        <EuiFormRow label="Confirm password">
+        <EuiFormRow label="Confirmar contraseña">
           <EuiFieldPassword
-            placeholder="Confirm password"
+            placeholder="Confirmar contraseña"
             value={confirmPassword}
             onChange={setConfirmPassword}
-            aria-label="Confirm password"
+            aria-label="Confirmar contraseña"
           />
         </EuiFormRow>
 
         <EuiSpacer />
 
         <EuiButton type="submit" fill fullWidth>
-          Sign up
+          Crea tu cuenta
         </EuiButton>
       </EuiForm>
     </div>

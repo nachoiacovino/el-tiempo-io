@@ -42,13 +42,13 @@ const Login = () => {
             aria-label="Email"
           />
         </EuiFormRow>
-        <EuiFormRow label="Password">
+        <EuiFormRow label="Contraseña">
           <EuiFieldPassword
-            placeholder="Password"
+            placeholder="Contraseña"
             type={dual ? 'dual' : undefined}
             value={password}
             onChange={setPassword}
-            aria-label="Password"
+            aria-label="Contraseña"
           />
         </EuiFormRow>
 
@@ -57,12 +57,12 @@ const Login = () => {
         <EuiFlexGrid columns={2}>
           <EuiFlexItem>
             <EuiButton type="submit" fill>
-              Sign In
+              Entrar
             </EuiButton>
           </EuiFlexItem>
           <EuiFlexItem>
             <EuiButton fill type="button" onClick={signInWithGoogle}>
-              Sign in with Google
+              Entrar con Google
             </EuiButton>
           </EuiFlexItem>
         </EuiFlexGrid>
