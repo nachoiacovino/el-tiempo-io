@@ -42,7 +42,8 @@ const Homepage = () => {
     <div className="Homepage">
       <EuiSpacer />
       <SearchBar options={options} />
-      <EuiFlexGrid columns={3}>
+      <EuiSpacer />
+      <EuiFlexGrid columns={3} className="CardList">
         {selected && <Card mnp={selected} />}
         {pinned.map((mnp) => (
           <Card key={mnp.municipio.ID_REL} mnp={mnp} pinned />

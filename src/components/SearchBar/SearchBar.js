@@ -15,7 +15,7 @@ const SearchBar = ({ options }) => {
 
   return (
     <EuiComboBox
-      placeholder="Select a single option"
+      placeholder="Busca un municipio"
       singleSelection={{ asPlainText: true }}
       options={options}
       selectedOptions={selectedOption}

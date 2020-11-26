@@ -30,6 +30,7 @@ const Card = ({ mnp, pinned }) => {
   return (
     <EuiFlexItem>
       <EuiCard
+        className="Card"
         title={
           <>
             {mnp.municipio.NOMBRE_CAPITAL} {buttonToShow}
