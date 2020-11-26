@@ -5,7 +5,9 @@ import {
   REQUEST_MUNICIPALITIES_FAILED,
   REQUEST_MUNICIPALITIES_PENDING,
   REQUEST_MUNICIPALITIES_SUCCESS,
+  REQUEST_SELECTED_FAILED,
   REQUEST_SELECTED_PENDING,
+  REQUEST_SELECTED_SUCCESS,
 } from './constants';
 
 function* setRequestMnpsAsync() {
@@ -24,8 +26,8 @@ export function* setRequestMunicipalities() {
   yield takeLatest(REQUEST_MUNICIPALITIES_PENDING, setRequestMnpsAsync);
 }
 
-function* setRequestSelectedAsync(action) {
-  /*   try {
+function* setRequestSelectedAsync({ payload }) {
+  try {
     const res = yield elTiempo.get(
       `provincias/${payload[0].CODPROV}/municipios/${payload[0].CODIGOINE.slice(
         0,
@@ -38,7 +40,7 @@ function* setRequestSelectedAsync(action) {
     });
   } catch (error) {
     yield put({ type: REQUEST_SELECTED_FAILED, payload: error });
-  } */
+  }
 }
 
 export function* setRequestSelected() {
