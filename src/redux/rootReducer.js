@@ -2,15 +2,15 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { currentUser, requestMunicipalities, requestSaved, requestSelected } from './reducers';
+import { currentUser, requestMunicipalities, requestSelected, setPinned } from './reducers';
 
 const persistConfig = { key: 'root', storage, whitelist: ['cart'] };
 
 const rootReducer = combineReducers({
   requestMunicipalities,
   requestSelected,
-  requestSaved,
   user: currentUser,
+  pinned: setPinned,
 });
 
 export default persistReducer(persistConfig, rootReducer);

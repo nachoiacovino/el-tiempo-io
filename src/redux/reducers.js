@@ -1,14 +1,13 @@
 import {
+  PIN_MUNICIPALITY,
   REQUEST_MUNICIPALITIES_FAILED,
   REQUEST_MUNICIPALITIES_PENDING,
   REQUEST_MUNICIPALITIES_SUCCESS,
-  REQUEST_SAVED_FAILED,
-  REQUEST_SAVED_PENDING,
-  REQUEST_SAVED_SUCCESS,
   REQUEST_SELECTED_FAILED,
   REQUEST_SELECTED_PENDING,
   REQUEST_SELECTED_SUCCESS,
   SET_CURRENT_USER,
+  UNPIN_MUNICIPALITY,
 } from './constants';
 
 const initialStateUser = {
@@ -76,20 +75,21 @@ export const requestSelected = (
   }
 };
 
-const initialStateSaved = {
-  isPending: false,
-  saved: null,
-  error: null,
+const initialStatePinned = {
+  municipalities: [],
 };
 
-export const requestSaved = (state = initialStateSaved, { type, payload }) => {
+export const setPinned = (state = initialStatePinned, { type, payload }) => {
   switch (type) {
-    case REQUEST_SAVED_PENDING:
-      return { ...state, isPending: true };
-    case REQUEST_SAVED_SUCCESS:
-      return { ...state, saved: payload, error: null, isPending: false };
-    case REQUEST_SAVED_FAILED:
-      return { ...state, error: payload, isPending: false };
+    case PIN_MUNICIPALITY:
+      return {
+        ...state,
+        municipalities: [...state.municipalities, { payload }],
+      };
+    case UNPIN_MUNICIPALITY:
+      return state.filter(
+        (mnp) => mnp.municipio.ID_REL !== payload.municipio.ID_REL.id,
+      );
     default:
       return state;
   }

@@ -1,12 +1,12 @@
 import './Homepage.scss';
 
-import { EuiCard, EuiFlexGrid, EuiFlexItem, EuiSpacer } from '@elastic/eui';
+import { EuiButton, EuiCard, EuiFlexGrid, EuiFlexItem, EuiSpacer } from '@elastic/eui';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { setRequestMnpsStart } from '../../redux/actions';
+import { pinMunicipality, setRequestMnpsStart } from '../../redux/actions';
 
 const Homepage = () => {
   const [options, setOptions] = useState([]);
@@ -37,6 +37,10 @@ const Homepage = () => {
     );
   }, [municipalities]);
 
+  const saveSearch = (selected) => {
+    dispatch(pinMunicipality(selected));
+  };
+
   return (
     <div className="Homepage">
       <EuiSpacer />
@@ -52,6 +56,14 @@ const Homepage = () => {
                 <>
                   Temperatura actual: {selected.temperatura_actual}.
                   Probabilidad de lluvia: {selected.lluvia}
+                  <EuiSpacer />
+                  <EuiButton
+                    type="EuiButton"
+                    fill
+                    onClick={() => saveSearch(selected)}
+                  >
+                    Guardar búsqueda
+                  </EuiButton>
                 </>
               }
             />
