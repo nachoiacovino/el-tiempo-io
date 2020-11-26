@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   requestMunicipalities,
   requestSelected,
   requestSaved,
-  currentUser,
+  user: currentUser,
 });
 
 export default persistReducer(persistConfig, rootReducer);
