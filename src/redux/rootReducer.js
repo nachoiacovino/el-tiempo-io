@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 
 import { currentUser, requestMunicipalities, requestSelected, setPinned } from './reducers';
 
-const persistConfig = { key: 'root', storage, whitelist: ['cart'] };
+const persistConfig = { key: 'root', storage, whitelist: ['pinned'] };
 
 const rootReducer = combineReducers({
   requestMunicipalities,
