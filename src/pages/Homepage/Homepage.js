@@ -47,7 +47,7 @@ const Homepage = () => {
       <SearchBar options={options} />
       <EuiFlexGrid columns={3}>
         {pinned.map((mnp) => (
-          <Card key={mnp.municipio.ID_REL} mnp={mnp} />
+          <Card key={mnp.municipio.ID_REL} mnp={mnp} pinned />
         ))}
         {selected && <Card mnp={selected} />}
       </EuiFlexGrid>
