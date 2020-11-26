@@ -29,10 +29,11 @@ const Homepage = () => {
 
   useEffect(() => {
     setOptions(
-      municipalities.map((option) => {
-        option.label = option.NOMBRE_CAPITAL;
-        return option;
-      }),
+      municipalities.map((option) => ({
+        label: option.NOMBRE_CAPITAL,
+        codigoine: option.CODIGOINE,
+        codprov: option.CODPROV,
+      })),
     );
   }, [municipalities]);
 
@@ -48,10 +49,10 @@ const Homepage = () => {
             <EuiCard
               title={selected.municipio.NOMBRE_CAPITAL}
               description={
-                <div>
+                <>
                   Temperatura actual: {selected.temperatura_actual}.
                   Probabilidad de lluvia: {selected.lluvia}
-                </div>
+                </>
               }
             />
           </EuiFlexItem>

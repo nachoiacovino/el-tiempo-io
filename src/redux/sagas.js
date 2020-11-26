@@ -29,7 +29,7 @@ export function* setRequestMunicipalities() {
 function* setRequestSelectedAsync({ payload }) {
   try {
     const res = yield elTiempo.get(
-      `provincias/${payload[0].CODPROV}/municipios/${payload[0].CODIGOINE.slice(
+      `provincias/${payload[0].codprov}/municipios/${payload[0].codigoine.slice(
         0,
         5,
       )}`,
