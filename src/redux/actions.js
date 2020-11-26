@@ -5,13 +5,14 @@ export const setCurrentUser = (user) => ({
   payload: user,
 });
 
-export const setRequestMnpsStart = () => (dispatch) => {
-  dispatch({ type: REQUEST_MUNICIPALITIES_PENDING });
-};
+export const setRequestMnpsStart = () => ({
+  type: REQUEST_MUNICIPALITIES_PENDING,
+});
 
-export const setRequestSelectedStart = (payload) => (dispatch) => {
-  dispatch({ type: REQUEST_SELECTED_PENDING, payload });
-};
+export const setRequestSelectedStart = (payload) => ({
+  type: REQUEST_SELECTED_PENDING,
+  payload,
+});
 
 export const setRequestSaved = () => {
   //

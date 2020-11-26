@@ -1,10 +1,9 @@
 import configureStore from 'redux-mock-store';
-import thunkMiddleware from 'redux-thunk';
 
 import { setRequestMunicipalities } from './actions';
 import { REQUEST_MUNICIPALITIES_PENDING } from './constants';
 
-const mockStore = configureStore([thunkMiddleware]);
+const mockStore = configureStore([]);
 
 describe('setRequestMunicipalities', () => {
   const store = mockStore();
