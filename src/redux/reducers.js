@@ -84,12 +84,15 @@ export const setPinned = (state = initialStatePinned, { type, payload }) => {
     case PIN_MUNICIPALITY:
       return {
         ...state,
-        municipalities: [...state.municipalities, { payload }],
+        municipalities: [...state.municipalities, { ...payload }],
       };
     case UNPIN_MUNICIPALITY:
-      return state.filter(
-        (mnp) => mnp.municipio.ID_REL !== payload.municipio.ID_REL.id,
-      );
+      return {
+        ...state,
+        municipalities: state.municipalities.filter(
+          (mnp) => mnp.municipio.ID_REL !== payload.municipio.ID_REL,
+        ),
+      };
     default:
       return state;
   }

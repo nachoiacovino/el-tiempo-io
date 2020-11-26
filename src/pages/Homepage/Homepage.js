@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { pinMunicipality, setRequestMnpsStart } from '../../redux/actions';
+import { pinMunicipality, setRequestMnpsStart, unpinMunicipality } from '../../redux/actions';
 
 const Homepage = () => {
   const [options, setOptions] = useState([]);
@@ -37,8 +37,9 @@ const Homepage = () => {
     );
   }, [municipalities]);
 
-  const saveSearch = (selected) => {
-    dispatch(pinMunicipality(selected));
+  const handlePin = (action, selected) => {
+    if (action === 'PIN') dispatch(pinMunicipality(selected));
+    else if (action === 'UNPIN') dispatch(unpinMunicipality(selected));
   };
 
   return (
@@ -60,9 +61,16 @@ const Homepage = () => {
                   <EuiButton
                     type="EuiButton"
                     fill
-                    onClick={() => saveSearch(selected)}
+                    onClick={() => handlePin('PIN', selected)}
                   >
                     Guardar búsqueda
+                  </EuiButton>
+                  <EuiButton
+                    type="EuiButton"
+                    fill
+                    onClick={() => handlePin('UNPIN', selected)}
+                  >
+                    Eliminar búsqueda
                   </EuiButton>
                 </>
               }
