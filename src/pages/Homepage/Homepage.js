@@ -6,25 +6,47 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Card from '../../components/Card/Card';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import { firestore } from '../../firebase/firebase.utils';
 import { setRequestMnpsStart } from '../../redux/actions';
 
 const Homepage = () => {
+  const [pinned, setPinned] = useState();
   const [options, setOptions] = useState([]);
 
   const dispatch = useDispatch();
+  const currentUser = useSelector(({ user }) => user.currentUser);
+  const pinnedStore = useSelector(({ user }) => user.pinned);
   const municipalities = useSelector(
     ({ requestMunicipalities }) => requestMunicipalities.municipalities,
   );
   const selected = useSelector(
     ({ requestSelected }) => requestSelected.selected,
   );
-  const pinned = useSelector(({ pinned }) => pinned.municipalities);
   const isPending = useSelector(
     ({ requestMunicipalities }) => requestMunicipalities.isPending,
   );
   const error = useSelector(
     ({ requestMunicipalities }) => requestMunicipalities.error,
   );
+
+  useEffect(() => {
+    if (currentUser) {
+      const handleSnapshot = (snapshot) => {
+        const pinned = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setPinned(pinned);
+      };
+
+      firestore
+        .doc(`users/${currentUser.id}`)
+        .collection('pinned')
+        .onSnapshot(handleSnapshot);
+    } else {
+      setPinned(pinnedStore);
+    }
+  }, [currentUser, pinnedStore]);
 
   useEffect(() => dispatch(setRequestMnpsStart()), [dispatch]);
 
@@ -45,7 +67,7 @@ const Homepage = () => {
       <EuiSpacer />
       <EuiFlexGrid columns={3} className="CardList">
         {selected && <Card mnp={selected} />}
-        {pinned.map((mnp) => (
+        {pinned?.map((mnp) => (
           <Card key={mnp.municipio.ID_REL} mnp={mnp} pinned />
         ))}
       </EuiFlexGrid>

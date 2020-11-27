@@ -1,3 +1,4 @@
+import { addPinned, deletePinned } from '../firebase/firebase.utils';
 import {
   CLEAR_SELECTED,
   PIN_MUNICIPALITY,
@@ -13,14 +14,29 @@ import {
 
 const initialStateUser = {
   currentUser: null,
+  pinned: [],
 };
 
-export const currentUser = (state = initialStateUser, action) => {
-  switch (action.type) {
+export const user = (state = initialStateUser, { type, payload }) => {
+  switch (type) {
     case SET_CURRENT_USER:
       return {
         ...state,
-        currentUser: action.payload,
+        currentUser: payload,
+      };
+    case PIN_MUNICIPALITY:
+      if (state.currentUser) addPinned(payload, state.currentUser.id);
+      return {
+        ...state,
+        pinned: [{ ...payload }, ...state.pinned],
+      };
+    case UNPIN_MUNICIPALITY:
+      if (state.currentUser) deletePinned(payload, state.currentUser.id);
+      return {
+        ...state,
+        pinned: state.pinned.filter(
+          (mnp) => mnp.municipio.ID_REL !== payload.municipio.ID_REL,
+        ),
       };
     default:
       return state;
@@ -73,29 +89,6 @@ export const requestSelected = (
       return { ...state, error: payload, isPending: false };
     case CLEAR_SELECTED:
       return { ...state, selected: null, error: null, isPending: false };
-    default:
-      return state;
-  }
-};
-
-const initialStatePinned = {
-  municipalities: [],
-};
-
-export const setPinned = (state = initialStatePinned, { type, payload }) => {
-  switch (type) {
-    case PIN_MUNICIPALITY:
-      return {
-        ...state,
-        municipalities: [{ ...payload }, ...state.municipalities],
-      };
-    case UNPIN_MUNICIPALITY:
-      return {
-        ...state,
-        municipalities: state.municipalities.filter(
-          (mnp) => mnp.municipio.ID_REL !== payload.municipio.ID_REL,
-        ),
-      };
     default:
       return state;
   }

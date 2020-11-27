@@ -39,6 +39,38 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+/* export const fetchPinned = async (userId) => {
+
+
+}; */
+
+export const addPinned = async (payload, userId) => {
+  const pinnedCollection = firestore
+    .doc(`users/${userId}`)
+    .collection('pinned');
+  try {
+    await pinnedCollection.add(payload);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deletePinned = async (payload, userId) => {
+  console.log('deleting...');
+  const pinToDelete = firestore
+    .doc(`users/${userId}`)
+    .collection('pinned')
+    .doc(payload.id);
+  console.log(payload.id);
+  console.log({ pinToDelete });
+  try {
+    await pinToDelete.delete(payload);
+    console.log('deleted');
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
