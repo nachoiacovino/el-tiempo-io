@@ -25,13 +25,19 @@ export const user = (state = initialStateUser, { type, payload }) => {
         currentUser: payload,
       };
     case PIN_MUNICIPALITY:
-      if (state.currentUser) addPinned(payload, state.currentUser.id);
+      if (state.currentUser) {
+        addPinned(payload, state.currentUser.id);
+        return state;
+      }
       return {
         ...state,
         pinned: [{ ...payload }, ...state.pinned],
       };
     case UNPIN_MUNICIPALITY:
-      if (state.currentUser) deletePinned(payload, state.currentUser.id);
+      if (state.currentUser) {
+        deletePinned(payload, state.currentUser.id);
+        return state;
+      }
       return {
         ...state,
         pinned: state.pinned.filter(
