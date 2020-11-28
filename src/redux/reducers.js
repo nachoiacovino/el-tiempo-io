@@ -31,7 +31,7 @@ export const user = (state = initialStateUser, { type, payload }) => {
       }
       return {
         ...state,
-        pinned: [{ ...payload }, ...state.pinned],
+        pinned: [...state.pinned, { ...payload }],
       };
     case UNPIN_MUNICIPALITY:
       if (state.currentUser) {

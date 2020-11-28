@@ -1,6 +1,6 @@
 import './Homepage.scss';
 
-import { EuiFlexGrid, EuiSpacer } from '@elastic/eui';
+import { EuiFlexGrid, EuiSpacer, EuiTitle } from '@elastic/eui';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -65,8 +65,21 @@ const Homepage = () => {
       <EuiSpacer />
       <SearchBar options={options} />
       <EuiSpacer />
+
+      {selected && (
+        <>
+          <EuiTitle>
+            <h2>Resultado de la búsqueda</h2>
+          </EuiTitle>
+          <Card mnp={selected} />
+          <EuiSpacer />
+        </>
+      )}
+
+      <EuiTitle>
+        <h2>Municipios guardados</h2>
+      </EuiTitle>
       <EuiFlexGrid columns={3} className="CardList">
-        {selected && <Card mnp={selected} />}
         {pinned?.map((mnp) => (
           <Card key={mnp.municipio.ID_REL} mnp={mnp} pinned />
         ))}
