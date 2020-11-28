@@ -14,9 +14,8 @@ import {
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { auth } from '../../firebase/firebase.utils';
 import useInputState from '../../hooks/useInputState';
-import { googleSignInStart } from '../../redux/user/userActions';
+import { emailSignInStart, googleSignInStart } from '../../redux/user/userActions';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -24,13 +23,9 @@ const Login = () => {
   const [password, setPassword] = useInputState('');
   const [dual] = useState(true);
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-    } catch (error) {
-      console.error(error);
-    }
+    dispatch(emailSignInStart({ email, password }));
   };
 
   const handleLoginWithGoogle = () => dispatch(googleSignInStart());

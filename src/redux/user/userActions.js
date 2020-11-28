@@ -29,23 +29,3 @@ export const emailSignInStart = (emailAndPassword) => ({
   type: EMAIL_SIGN_IN_START,
   payload: emailAndPassword,
 });
-
-/* export const googleSignInSuccess = (user) => ({
-  type: GOOGLE_SIGN_IN_SUCCESS,
-  payload: user,
-});
-
-export const googleSignInFailed = (error) => ({
-  type: GOOGLE_SIGN_IN_FAILED,
-  payload: error,
-});
-
-export const emailSignInSuccess = (user) => ({
-  type: EMAIL_SIGN_IN_SUCCESS,
-  payload: user,
-});
-
-export const emailSignInFailed = (error) => ({
-  type: EMAIL_SIGN_IN_FAILED,
-  payload: error,
-}); */
