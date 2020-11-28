@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import elTiempo from '../api/elTiempo';
 import {
@@ -39,10 +39,14 @@ function* setRequestSelectedAsync({ payload }) {
   }
 }
 
-export function* setRequestMunicipalities() {
+function* setRequestMunicipalities() {
   yield takeLatest(REQUEST_MUNICIPALITIES_PENDING, setRequestMnpsAsync);
 }
 
-export function* setRequestSelected() {
+function* setRequestSelected() {
   yield takeLatest(REQUEST_SELECTED_PENDING, setRequestSelectedAsync);
+}
+
+export default function* mainSagas() {
+  yield all([call(setRequestMunicipalities), call(setRequestSelected)]);
 }
