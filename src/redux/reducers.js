@@ -1,53 +1,12 @@
-import { addPinned, deletePinned } from '../firebase/firebase.utils';
 import {
   CLEAR_SELECTED,
-  PIN_MUNICIPALITY,
   REQUEST_MUNICIPALITIES_FAILED,
   REQUEST_MUNICIPALITIES_PENDING,
   REQUEST_MUNICIPALITIES_SUCCESS,
   REQUEST_SELECTED_FAILED,
   REQUEST_SELECTED_PENDING,
   REQUEST_SELECTED_SUCCESS,
-  SET_CURRENT_USER,
-  UNPIN_MUNICIPALITY,
 } from './constants';
-
-const initialStateUser = {
-  currentUser: null,
-  pinned: [],
-};
-
-export const user = (state = initialStateUser, { type, payload }) => {
-  switch (type) {
-    case SET_CURRENT_USER:
-      return {
-        ...state,
-        currentUser: payload,
-      };
-    case PIN_MUNICIPALITY:
-      if (state.currentUser) {
-        addPinned(payload, state.currentUser.id);
-        return state;
-      }
-      return {
-        ...state,
-        pinned: [...state.pinned, { ...payload }],
-      };
-    case UNPIN_MUNICIPALITY:
-      if (state.currentUser) {
-        deletePinned(payload, state.currentUser.id);
-        return state;
-      }
-      return {
-        ...state,
-        pinned: state.pinned.filter(
-          (mnp) => mnp.municipio.ID_REL !== payload.municipio.ID_REL,
-        ),
-      };
-    default:
-      return state;
-  }
-};
 
 const initialStateRequest = {
   isPending: false,

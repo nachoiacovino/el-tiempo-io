@@ -3,7 +3,7 @@ import './Card.scss';
 import { EuiButtonIcon, EuiCard, EuiFlexItem } from '@elastic/eui';
 import { useDispatch } from 'react-redux';
 
-import { pinMunicipality, unpinMunicipality } from '../../redux/actions';
+import { pinMunicipality, unpinMunicipality } from '../../redux/user/userActions';
 
 const Card = ({ mnp, pinned }) => {
   const dispatch = useDispatch();

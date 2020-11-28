@@ -6,7 +6,7 @@ import Header from './components/Header/Header';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import Homepage from './pages/Homepage/Homepage';
 import SignIn from './pages/SignIn/SignIn';
-import { setCurrentUser } from './redux/actions';
+import { setCurrentUser } from './redux/user/userActions';
 
 const App = () => {
   const dispatch = useDispatch();
