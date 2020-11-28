@@ -75,15 +75,18 @@ const Homepage = () => {
           <EuiSpacer />
         </>
       )}
-
-      <EuiTitle>
-        <h2>Municipios guardados</h2>
-      </EuiTitle>
-      <EuiFlexGrid columns={3} className="CardList">
-        {pinned?.map((mnp) => (
-          <Card key={mnp.municipio.ID_REL} mnp={mnp} pinned />
-        ))}
-      </EuiFlexGrid>
+      {pinned?.length > 0 && (
+        <>
+          <EuiTitle>
+            <h2>Municipios guardados</h2>
+          </EuiTitle>
+          <EuiFlexGrid columns={3} className="CardList">
+            {pinned.map((mnp) => (
+              <Card key={mnp.municipio.ID_REL} mnp={mnp} pinned />
+            ))}
+          </EuiFlexGrid>
+        </>
+      )}
     </div>
   );
 };
