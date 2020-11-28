@@ -12,16 +12,19 @@ import {
   EuiSpacer,
 } from '@elastic/eui';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth } from '../../firebase/firebase.utils';
 import useInputState from '../../hooks/useInputState';
+import { googleSignInStart } from '../../redux/user/userActions';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useInputState('');
   const [password, setPassword] = useInputState('');
   const [dual] = useState(true);
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await auth.signInWithEmailAndPassword(email, password);
@@ -30,9 +33,11 @@ const Login = () => {
     }
   };
 
+  const handleLoginWithGoogle = () => dispatch(googleSignInStart());
+
   return (
     <div className="Login">
-      <EuiForm component="form" onSubmit={handleSubmit}>
+      <EuiForm component="form" onSubmit={handleLogin}>
         <EuiFormRow label="Email">
           <EuiFieldText
             placeholder="Email"
@@ -61,7 +66,7 @@ const Login = () => {
             </EuiButton>
           </EuiFlexItem>
           <EuiFlexItem>
-            <EuiButton fill type="button" onClick={signInWithGoogle}>
+            <EuiButton fill type="button" onClick={handleLoginWithGoogle}>
               Entrar con Google
             </EuiButton>
           </EuiFlexItem>
