@@ -1,12 +1,5 @@
 import { addPinned, deletePinned } from '../../firebase/firebase.utils';
-import {
-  EMAIL_SIGN_IN_FAILED,
-  EMAIL_SIGN_IN_SUCCESS,
-  GOOGLE_SIGN_IN_FAILED,
-  GOOGLE_SIGN_IN_SUCCESS,
-  PIN_MUNICIPALITY,
-  UNPIN_MUNICIPALITY,
-} from './userConstants';
+import { PIN_MUNICIPALITY, SIGN_IN_FAILED, SIGN_IN_SUCCESS, UNPIN_MUNICIPALITY } from './userConstants';
 
 const initialState = {
   currentUser: null,
@@ -16,15 +9,13 @@ const initialState = {
 
 export const user = (state = initialState, { type, payload }) => {
   switch (type) {
-    case GOOGLE_SIGN_IN_SUCCESS:
-    case EMAIL_SIGN_IN_SUCCESS:
+    case SIGN_IN_SUCCESS:
       return {
         ...state,
         currentUser: payload,
         error: null,
       };
-    case GOOGLE_SIGN_IN_FAILED:
-    case EMAIL_SIGN_IN_FAILED:
+    case SIGN_IN_FAILED:
       return {
         ...state,
         error: payload,

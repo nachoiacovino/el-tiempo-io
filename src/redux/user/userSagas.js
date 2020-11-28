@@ -3,13 +3,11 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { auth, createUserProfileDocument, googleProvider } from '../../firebase/firebase.utils';
 import { CLEAR_SELECTED } from '../constants';
 import {
-  EMAIL_SIGN_IN_FAILED,
   EMAIL_SIGN_IN_START,
-  EMAIL_SIGN_IN_SUCCESS,
-  GOOGLE_SIGN_IN_FAILED,
   GOOGLE_SIGN_IN_START,
-  GOOGLE_SIGN_IN_SUCCESS,
   PIN_MUNICIPALITY,
+  SIGN_IN_FAILED,
+  SIGN_IN_SUCCESS,
 } from './userConstants';
 
 function* clearSelected() {
@@ -20,18 +18,29 @@ function* watchPin() {
   yield takeLatest(PIN_MUNICIPALITY, clearSelected);
 }
 
-function* signInWithGoogle() {
+function* getSnapshot(user) {
   try {
-    const { user } = yield auth.signInWithPopup(googleProvider);
     const userRef = yield call(createUserProfileDocument, user);
     const userSnapshot = yield userRef.get();
     yield put({
-      type: GOOGLE_SIGN_IN_SUCCESS,
+      type: SIGN_IN_SUCCESS,
       payload: { id: userSnapshot.id, ...userSnapshot.data() },
     });
   } catch (error) {
     yield put({
-      type: GOOGLE_SIGN_IN_FAILED,
+      type: SIGN_IN_FAILED,
+      payload: error,
+    });
+  }
+}
+
+function* signInWithGoogle() {
+  try {
+    const { user } = yield auth.signInWithPopup(googleProvider);
+    yield getSnapshot(user);
+  } catch (error) {
+    yield put({
+      type: SIGN_IN_FAILED,
       payload: error,
     });
   }
@@ -44,15 +53,10 @@ function* onGoogleSignInStart() {
 function* signInWithEmail({ payload: { email, password } }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    const userRef = yield call(createUserProfileDocument, user);
-    const userSnapshot = yield userRef.get();
-    yield put({
-      type: EMAIL_SIGN_IN_SUCCESS,
-      payload: { id: userSnapshot.id, ...userSnapshot.data() },
-    });
+    yield getSnapshot(user);
   } catch (error) {
     yield put({
-      type: EMAIL_SIGN_IN_FAILED,
+      type: SIGN_IN_FAILED,
       payload: error,
     });
   }

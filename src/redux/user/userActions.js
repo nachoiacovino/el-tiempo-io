@@ -1,15 +1,4 @@
-import {
-  EMAIL_SIGN_IN_START,
-  GOOGLE_SIGN_IN_START,
-  PIN_MUNICIPALITY,
-  SET_CURRENT_USER,
-  UNPIN_MUNICIPALITY,
-} from './userConstants';
-
-export const setCurrentUser = (user) => ({
-  type: SET_CURRENT_USER,
-  payload: user,
-});
+import { EMAIL_SIGN_IN_START, GOOGLE_SIGN_IN_START, PIN_MUNICIPALITY, UNPIN_MUNICIPALITY } from './userConstants';
 
 export const pinMunicipality = (payload) => ({
   type: PIN_MUNICIPALITY,
