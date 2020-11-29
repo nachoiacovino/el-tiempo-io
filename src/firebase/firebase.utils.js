@@ -51,16 +51,12 @@ export const addPinned = async (payload, userId) => {
 };
 
 export const deletePinned = async (payload, userId) => {
-  console.log('deleting...');
   const pinToDelete = firestore
     .doc(`users/${userId}`)
     .collection('pinned')
     .doc(payload.id);
-  console.log(payload.id);
-  console.log({ pinToDelete });
   try {
     await pinToDelete.delete(payload);
-    console.log('deleted');
   } catch (error) {
     console.error(error);
   }
