@@ -62,8 +62,15 @@ export const addPinned = async (payload, userId) => {
   const pinnedCollection = firestore
     .doc(`users/${userId}`)
     .collection('pinned');
+
+  const mnp = {
+    label: payload.municipio.NOMBRE_CAPITAL,
+    codigoine: payload.municipio.CODIGOINE,
+    codprov: payload.municipio.CODPROV,
+  };
+
   try {
-    await pinnedCollection.add(payload);
+    await pinnedCollection.add(mnp);
   } catch (error) {
     console.error(error);
   }

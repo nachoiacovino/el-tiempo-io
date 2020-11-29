@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Card from '../../components/Card/Card';
 import Loading from '../../components/Loading/Loading';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { fetchPinned } from '../../firebase/firebase.utils';
+import { firestore } from '../../firebase/firebase.utils';
 import { setRequestMnpsStart } from '../../redux/actions';
 import { updatePinnedStart } from '../../redux/user/userActions';
 
@@ -105,7 +105,11 @@ const Homepage = () => {
           </EuiTitle>
           <EuiFlexGrid columns={3} className="CardList">
             {pinned.map((mnp) => (
-              <Card key={mnp.municipio.ID_REL} mnp={mnp} pinned />
+              <Card
+                key={currentUser ? mnp.id : mnp.municipio.ID_REL}
+                mnp={mnp}
+                pinned
+              />
             ))}
           </EuiFlexGrid>
         </>
