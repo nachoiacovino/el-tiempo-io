@@ -102,7 +102,7 @@ function* onSignOutStart() {
   yield takeLatest(SIGN_OUT_START, signOut);
 }
 
-function* updatePinned({ payload }) {
+function* setUpdatePinned({ payload }) {
   try {
     const data = yield payload.map((mnp) => ({
       codigoine: mnp.municipio.CODIGOINE,
@@ -121,7 +121,7 @@ function* updatePinned({ payload }) {
 }
 
 function* onUpdatePinnedStart() {
-  yield takeLatest(UPDATE_PINNED_START, updatePinned);
+  yield takeLatest(UPDATE_PINNED_START, setUpdatePinned);
 }
 
 export default function* userSagas() {

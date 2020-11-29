@@ -39,6 +39,25 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const fetchPinned = async (userId) => {
+  firestore
+    .doc(`users/${userId}`)
+    .collection('pinned')
+    .onSnapshot(handleSnapshot);
+
+  let fetchedPinned;
+
+  function handleSnapshot(snapshot) {
+    const pinned = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    fetchedPinned = pinned;
+  }
+
+  return fetchedPinned;
+};
+
 export const addPinned = async (payload, userId) => {
   const pinnedCollection = firestore
     .doc(`users/${userId}`)

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Card from '../../components/Card/Card';
 import Loading from '../../components/Loading/Loading';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { firestore } from '../../firebase/firebase.utils';
+import { fetchPinned } from '../../firebase/firebase.utils';
 import { setRequestMnpsStart } from '../../redux/actions';
 import { updatePinnedStart } from '../../redux/user/userActions';
 
@@ -33,23 +33,16 @@ const Homepage = () => {
 
   useEffect(() => {
     if (currentUser) {
-      const handleSnapshot = (snapshot) => {
-        const pinned = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setPinned(pinned);
-      };
-
-      firestore
-        .doc(`users/${currentUser.id}`)
-        .collection('pinned')
-        .onSnapshot(handleSnapshot);
+      setPinned(fetchPinned(currentUser.id));
     } else {
-      dispatch(updatePinnedStart(pinnedStore));
       setPinned(pinnedStore);
     }
-  }, [currentUser, dispatch]);
+  }, [currentUser, pinnedStore]);
+
+  useEffect(() => {
+    dispatch(updatePinnedStart(pinnedStore));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     dispatch(setRequestMnpsStart());
