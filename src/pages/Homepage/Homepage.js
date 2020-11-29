@@ -33,7 +33,18 @@ const Homepage = () => {
 
   useEffect(() => {
     if (currentUser) {
-      setPinned(fetchPinned(currentUser.id));
+      const handleSnapshot = (snapshot) => {
+        const pinned = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setPinned(pinned);
+      };
+
+      firestore
+        .doc(`users/${currentUser.id}`)
+        .collection('pinned')
+        .onSnapshot(handleSnapshot);
     } else {
       setPinned(pinnedStore);
     }
