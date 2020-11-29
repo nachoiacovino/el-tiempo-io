@@ -1,6 +1,16 @@
 import './Register.scss';
 
-import { EuiButton, EuiFieldPassword, EuiFieldText, EuiForm, EuiFormRow, EuiIcon, EuiSpacer } from '@elastic/eui';
+import {
+  EuiButton,
+  EuiFieldPassword,
+  EuiFieldText,
+  EuiFlexItem,
+  EuiForm,
+  EuiFormRow,
+  EuiIcon,
+  EuiSpacer,
+  EuiTitle,
+} from '@elastic/eui';
 import { useDispatch } from 'react-redux';
 
 import useInputState from '../../hooks/useInputState';
@@ -25,7 +35,11 @@ const Register = () => {
   };
 
   return (
-    <div className="Register">
+    <EuiFlexItem>
+      <EuiTitle>
+        <h2>¿Aún no te has registrado?</h2>
+      </EuiTitle>
+      <EuiSpacer />
       <EuiForm component="form" onSubmit={handleSubmit}>
         <EuiFormRow label="Nombre">
           <EuiFieldText
@@ -68,7 +82,7 @@ const Register = () => {
           Crea tu cuenta
         </EuiButton>
       </EuiForm>
-    </div>
+    </EuiFlexItem>
   );
 };
 

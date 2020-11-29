@@ -10,6 +10,7 @@ import {
   EuiFormRow,
   EuiIcon,
   EuiSpacer,
+  EuiTitle,
 } from '@elastic/eui';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -31,7 +32,11 @@ const Login = () => {
   const handleLoginWithGoogle = () => dispatch(googleSignInStart());
 
   return (
-    <div className="Login">
+    <EuiFlexItem>
+      <EuiTitle>
+        <h2>¿Ya tienes cuenta?</h2>
+      </EuiTitle>
+      <EuiSpacer />
       <EuiForm component="form" onSubmit={handleLogin}>
         <EuiFormRow label="Email">
           <EuiFieldText
@@ -67,7 +72,7 @@ const Login = () => {
           </EuiFlexItem>
         </EuiFlexGrid>
       </EuiForm>
-    </div>
+    </EuiFlexItem>
   );
 };
 
