@@ -1,4 +1,10 @@
-import { EMAIL_SIGN_IN_START, GOOGLE_SIGN_IN_START, PIN_MUNICIPALITY, UNPIN_MUNICIPALITY } from './userConstants';
+import {
+  EMAIL_SIGN_IN_START,
+  GOOGLE_SIGN_IN_START,
+  PIN_MUNICIPALITY,
+  SIGN_IN_FAILED,
+  UNPIN_MUNICIPALITY,
+} from './userConstants';
 
 export const pinMunicipality = (payload) => ({
   type: PIN_MUNICIPALITY,
@@ -17,4 +23,9 @@ export const googleSignInStart = () => ({
 export const emailSignInStart = (emailAndPassword) => ({
   type: EMAIL_SIGN_IN_START,
   payload: emailAndPassword,
+});
+
+export const signInFailed = (error) => ({
+  type: SIGN_IN_FAILED,
+  payload: error,
 });
