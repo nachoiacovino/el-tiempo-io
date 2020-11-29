@@ -52,7 +52,6 @@ export const user = (state = initialState, { type, payload }) => {
         ...state,
         pinned: [...state.pinned, { ...payload }],
       };
-
     case UNPIN_MUNICIPALITY:
       if (state.currentUser) deletePinned(payload, state.currentUser.id);
       return {

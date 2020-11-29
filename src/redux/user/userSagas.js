@@ -117,7 +117,8 @@ function* setUpdatePinned({ payload }) {
 
     const updated = [];
     for (let i = 0; i < data.length; i++) {
-      const j = yield requestMunicipality(data[i]);
+      let j = yield requestMunicipality(data[i]);
+      j.id = yield data[i].id;
       yield updated.push(j);
     }
     yield put({ type: UPDATE_PINNED_SUCCESS, payload: updated });
