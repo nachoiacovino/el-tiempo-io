@@ -1,6 +1,6 @@
 import './Homepage.scss';
 
-import { EuiFlexGrid, EuiSpacer, EuiTitle } from '@elastic/eui';
+import { EuiFlexGrid, EuiSpacer, EuiTitle, EuiToast } from '@elastic/eui';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -62,6 +62,18 @@ const Homepage = () => {
   }, [municipalities]);
 
   if (isPending) return <Loading />;
+  if (error)
+    return (
+      <div className="error">
+        <EuiToast
+          title="No se han podido recuperar los municipios"
+          color="danger"
+          iconType="alert"
+        >
+          Por favor, inténtalo de nuevo más tarde.
+        </EuiToast>
+      </div>
+    );
 
   return (
     <div className="Homepage">
