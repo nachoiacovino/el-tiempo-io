@@ -1,5 +1,12 @@
 import { addPinned, deletePinned } from '../../firebase/firebase.utils';
-import { PIN_MUNICIPALITY, SIGN_IN_FAILED, SIGN_IN_SUCCESS, UNPIN_MUNICIPALITY } from './userConstants';
+import {
+  PIN_MUNICIPALITY,
+  SIGN_IN_FAILED,
+  SIGN_IN_SUCCESS,
+  SIGN_OUT_FAILED,
+  SIGN_OUT_SUCCESS,
+  UNPIN_MUNICIPALITY,
+} from './userConstants';
 
 const initialState = {
   currentUser: null,
@@ -15,7 +22,14 @@ export const user = (state = initialState, { type, payload }) => {
         currentUser: payload,
         error: null,
       };
+    case SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        currentUser: null,
+        error: null,
+      };
     case SIGN_IN_FAILED:
+    case SIGN_OUT_FAILED:
       return {
         ...state,
         error: payload,

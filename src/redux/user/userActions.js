@@ -3,6 +3,7 @@ import {
   GOOGLE_SIGN_IN_START,
   PIN_MUNICIPALITY,
   SIGN_IN_FAILED,
+  SIGN_OUT_START,
   UNPIN_MUNICIPALITY,
 } from './userConstants';
 
@@ -28,4 +29,8 @@ export const emailSignInStart = (emailAndPassword) => ({
 export const signInFailed = (error) => ({
   type: SIGN_IN_FAILED,
   payload: error,
+});
+
+export const signOutStart = () => ({
+  type: SIGN_OUT_START,
 });

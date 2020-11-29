@@ -1,13 +1,16 @@
 import './Header.scss';
 
 import { EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderLogo, EuiHeaderSectionItem } from '@elastic/eui';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { auth } from '../../firebase/firebase.utils';
+import { signOutStart } from '../../redux/user/userActions';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector(({ user }) => user.currentUser);
+
+  const signOut = () => dispatch(signOutStart());
 
   return (
     <EuiHeader>
@@ -24,9 +27,7 @@ const Header = () => {
               <EuiHeaderLink className="greeting">
                 ¡Hola {currentUser.displayName}!
               </EuiHeaderLink>
-              <EuiHeaderLink onClick={() => auth.signOut()}>
-                Salir
-              </EuiHeaderLink>
+              <EuiHeaderLink onClick={signOut}>Salir</EuiHeaderLink>
             </>
           ) : (
             <EuiHeaderLink>
