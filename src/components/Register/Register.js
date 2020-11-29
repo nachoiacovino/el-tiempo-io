@@ -4,6 +4,7 @@ import {
   EuiButton,
   EuiFieldPassword,
   EuiFieldText,
+  EuiFlexGrid,
   EuiFlexItem,
   EuiForm,
   EuiFormRow,
@@ -14,7 +15,7 @@ import {
 import { useDispatch } from 'react-redux';
 
 import useInputState from '../../hooks/useInputState';
-import { signUpStart } from '../../redux/user/userActions';
+import { googleSignInStart, signUpStart } from '../../redux/user/userActions';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,8 @@ const Register = () => {
 
     dispatch(signUpStart({ email, password, displayName }));
   };
+
+  const handleLoginWithGoogle = () => dispatch(googleSignInStart());
 
   return (
     <EuiFlexItem>
@@ -78,9 +81,18 @@ const Register = () => {
 
         <EuiSpacer />
 
-        <EuiButton type="submit" fill fullWidth>
-          Crea tu cuenta
-        </EuiButton>
+        <EuiFlexGrid columns={2}>
+          <EuiFlexItem>
+            <EuiButton type="submit" fill>
+              Crea tu cuenta
+            </EuiButton>
+          </EuiFlexItem>
+          <EuiFlexItem>
+            <EuiButton fill type="button" onClick={handleLoginWithGoogle}>
+              Crea tu cuenta con Google
+            </EuiButton>
+          </EuiFlexItem>
+        </EuiFlexGrid>
       </EuiForm>
     </EuiFlexItem>
   );
