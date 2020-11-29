@@ -12,22 +12,21 @@ import { setRequestMnpsStart } from '../../redux/actions';
 import { updatePinnedStart } from '../../redux/user/userActions';
 
 const Homepage = () => {
-  const [pinned, setPinned] = useState();
   const [options, setOptions] = useState([]);
 
   const dispatch = useDispatch();
   const currentUser = useSelector(({ user }) => user.currentUser);
-  const pinnedStore = useSelector(({ user }) => user.pinned);
+  const pinned = useSelector(({ user }) => user.pinned);
   const municipalities = useSelector(
     ({ requestMunicipalities }) => requestMunicipalities.municipalities,
   );
   const selected = useSelector(
     ({ requestSelected }) => requestSelected.selected,
   );
-  const isPending = useSelector(
+  const municipalitiesIsPending = useSelector(
     ({ requestMunicipalities }) => requestMunicipalities.isPending,
   );
-  const error = useSelector(
+  const municipalitiesError = useSelector(
     ({ requestMunicipalities }) => requestMunicipalities.error,
   );
 
@@ -38,7 +37,7 @@ const Homepage = () => {
           id: doc.id,
           ...doc.data(),
         }));
-        setPinned(pinned);
+        dispatch(updatePinnedStart(pinned));
       };
 
       firestore
@@ -46,14 +45,9 @@ const Homepage = () => {
         .collection('pinned')
         .onSnapshot(handleSnapshot);
     } else {
-      setPinned(pinnedStore);
+      dispatch(updatePinnedStart(pinned));
     }
-  }, [currentUser, pinnedStore]);
-
-  useEffect(() => {
-    dispatch(updatePinnedStart(pinnedStore));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentUser, dispatch]);
 
   useEffect(() => {
     dispatch(setRequestMnpsStart());
@@ -69,8 +63,8 @@ const Homepage = () => {
     );
   }, [municipalities]);
 
-  if (isPending) return <Loading />;
-  if (error)
+  if (municipalitiesIsPending) return <Loading />;
+  if (municipalitiesError)
     return (
       <div className="error">
         <EuiToast

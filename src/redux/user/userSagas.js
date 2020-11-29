@@ -104,10 +104,16 @@ function* onSignOutStart() {
 
 function* setUpdatePinned({ payload }) {
   try {
-    const data = yield payload.map((mnp) => ({
-      codigoine: mnp.municipio.CODIGOINE,
-      codprov: mnp.municipio.CODPROV,
-    }));
+    let data;
+
+    if (payload[0].label) {
+      data = yield payload;
+    } else {
+      data = yield payload.map((mnp) => ({
+        codigoine: mnp.municipio.CODIGOINE,
+        codprov: mnp.municipio.CODPROV,
+      }));
+    }
 
     const updated = [];
     for (let i = 0; i < data.length; i++) {
