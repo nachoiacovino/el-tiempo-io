@@ -31,6 +31,7 @@ export const user = (state = initialState, { type, payload }) => {
         ...state,
         currentUser: null,
         error: null,
+        pinned: [],
       };
     case SIGN_UP_FAILED:
     case SIGN_IN_FAILED:
