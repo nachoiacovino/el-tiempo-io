@@ -1,4 +1,5 @@
 import {
+  CLEAR_PINNED,
   EMAIL_SIGN_IN_START,
   GOOGLE_SIGN_IN_START,
   PIN_MUNICIPALITY,
@@ -15,6 +16,10 @@ export const pinMunicipality = (payload) => ({
 export const unpinMunicipality = (payload) => ({
   type: UNPIN_MUNICIPALITY,
   payload,
+});
+
+export const clearPinned = () => ({
+  type: CLEAR_PINNED,
 });
 
 export const googleSignInStart = () => ({

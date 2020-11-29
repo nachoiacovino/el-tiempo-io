@@ -4,6 +4,7 @@ import { auth, createUserProfileDocument, googleProvider } from '../../firebase/
 import { CLEAR_SELECTED } from '../constants';
 import { signInFailed } from './userActions';
 import {
+  CLEAR_PINNED,
   EMAIL_SIGN_IN_START,
   GOOGLE_SIGN_IN_START,
   PIN_MUNICIPALITY,
@@ -19,6 +20,14 @@ function* clearSelected() {
 
 function* watchPin() {
   yield takeLatest(PIN_MUNICIPALITY, clearSelected);
+}
+
+function* clearPinned() {
+  yield put({ type: CLEAR_PINNED });
+}
+
+function* onSignInSuccess() {
+  yield takeLatest(SIGN_IN_SUCCESS, clearPinned);
 }
 
 function* getSnapshot(user) {
@@ -78,6 +87,7 @@ export default function* userSagas() {
     call(watchPin),
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
+    call(onSignInSuccess),
     call(onSignOutStart),
   ]);
 }

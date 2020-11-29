@@ -1,5 +1,6 @@
 import { addPinned, deletePinned } from '../../firebase/firebase.utils';
 import {
+  CLEAR_PINNED,
   PIN_MUNICIPALITY,
   SIGN_IN_FAILED,
   SIGN_IN_SUCCESS,
@@ -53,6 +54,11 @@ export const user = (state = initialState, { type, payload }) => {
         pinned: state.pinned.filter(
           (mnp) => mnp.municipio.ID_REL !== payload.municipio.ID_REL,
         ),
+      };
+    case CLEAR_PINNED:
+      return {
+        ...state,
+        pinned: null,
       };
     default:
       return state;
