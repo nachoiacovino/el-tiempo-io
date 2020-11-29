@@ -22,17 +22,19 @@ function* setRequestMnpsAsync() {
   }
 }
 
+function* requestMunicipality(mnp) {
+  const res = yield elTiempo.get(
+    `provincias/${mnp[0].codprov}/municipios/${mnp[0].codigoine.slice(0, 5)}`,
+  );
+  return res.data;
+}
+
 function* setRequestSelectedAsync({ payload }) {
   try {
-    const res = yield elTiempo.get(
-      `provincias/${payload[0].codprov}/municipios/${payload[0].codigoine.slice(
-        0,
-        5,
-      )}`,
-    );
+    const data = yield requestMunicipality(payload);
     yield put({
       type: REQUEST_SELECTED_SUCCESS,
-      payload: res.data,
+      payload: data,
     });
   } catch (error) {
     yield put({ type: REQUEST_SELECTED_FAILED, payload: error });
