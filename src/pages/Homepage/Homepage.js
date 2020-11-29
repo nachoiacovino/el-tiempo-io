@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Card from '../../components/Card/Card';
+import Loading from '../../components/Loading/Loading';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { firestore } from '../../firebase/firebase.utils';
 import { setRequestMnpsStart } from '../../redux/actions';
@@ -59,6 +60,8 @@ const Homepage = () => {
       })),
     );
   }, [municipalities]);
+
+  if (isPending) return <Loading />;
 
   return (
     <div className="Homepage">
