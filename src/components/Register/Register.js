@@ -1,17 +1,19 @@
 import './Register.scss';
 
 import { EuiButton, EuiFieldPassword, EuiFieldText, EuiForm, EuiFormRow, EuiIcon, EuiSpacer } from '@elastic/eui';
+import { useDispatch } from 'react-redux';
 
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import useInputState from '../../hooks/useInputState';
+import { signUpStart } from '../../redux/user/userActions';
 
 const Register = () => {
+  const dispatch = useDispatch();
   const [displayName, setDisplayName] = useInputState('');
   const [email, setEmail] = useInputState('');
   const [password, setPassword] = useInputState('');
   const [confirmPassword, setConfirmPassword] = useInputState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -19,15 +21,7 @@ const Register = () => {
       return;
     }
 
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password,
-      );
-      await createUserProfileDocument(user, { displayName });
-    } catch (error) {
-      console.error(error);
-    }
+    dispatch(signUpStart({ email, password, displayName }));
   };
 
   return (

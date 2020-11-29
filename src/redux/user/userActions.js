@@ -5,6 +5,8 @@ import {
   PIN_MUNICIPALITY,
   SIGN_IN_FAILED,
   SIGN_OUT_START,
+  SIGN_UP_START,
+  SIGN_UP_SUCCESS,
   UNPIN_MUNICIPALITY,
 } from './userConstants';
 
@@ -20,6 +22,16 @@ export const unpinMunicipality = (payload) => ({
 
 export const clearPinned = () => ({
   type: CLEAR_PINNED,
+});
+
+export const signUpStart = (userCredentials) => ({
+  type: SIGN_UP_START,
+  payload: userCredentials,
+});
+
+export const signUpSuccess = ({ user, additionalData }) => ({
+  type: SIGN_UP_SUCCESS,
+  payload: { user, additionalData },
 });
 
 export const googleSignInStart = () => ({

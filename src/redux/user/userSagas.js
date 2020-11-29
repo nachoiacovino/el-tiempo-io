@@ -2,7 +2,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import { auth, createUserProfileDocument, googleProvider } from '../../firebase/firebase.utils';
 import { CLEAR_SELECTED } from '../constants';
-import { clearPinned, signInFailed } from './userActions';
+import { clearPinned, signInFailed, signUpSuccess } from './userActions';
 import {
   EMAIL_SIGN_IN_START,
   GOOGLE_SIGN_IN_START,
@@ -11,6 +11,9 @@ import {
   SIGN_OUT_FAILED,
   SIGN_OUT_START,
   SIGN_OUT_SUCCESS,
+  SIGN_UP_FAILED,
+  SIGN_UP_START,
+  SIGN_UP_SUCCESS,
 } from './userConstants';
 
 function* clearSelected() {
@@ -21,9 +24,9 @@ function* watchPin() {
   yield takeLatest(PIN_MUNICIPALITY, clearSelected);
 }
 
-function* getSnapshot(user) {
+function* getSnapshot(user, additionalData) {
   try {
-    const userRef = yield call(createUserProfileDocument, user);
+    const userRef = yield call(createUserProfileDocument, user, additionalData);
     const userSnapshot = yield userRef.get();
     yield put({
       type: SIGN_IN_SUCCESS,
@@ -35,12 +38,33 @@ function* getSnapshot(user) {
   }
 }
 
+function* signUp({ payload: { email, password, displayName } }) {
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    yield put(signUpSuccess({ user, additionalData: { displayName } }));
+  } catch (error) {
+    yield put({ type: SIGN_UP_FAILED, payload: error });
+  }
+}
+
+function* onSignUp() {
+  yield takeLatest(SIGN_UP_START, signUp);
+}
+
+function* signInAfterSignUp({ payload: { user, additionalData } }) {
+  yield getSnapshot(user, additionalData);
+}
+
+function* onSignUpSuccess() {
+  yield takeLatest(SIGN_UP_SUCCESS, signInAfterSignUp);
+}
+
 function* signInWithGoogle() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
     yield getSnapshot(user);
   } catch (error) {
-    yield put(signInFailed());
+    yield put(signInFailed(error));
   }
 }
 
@@ -77,9 +101,10 @@ function* onSignOutStart() {
 export default function* userSagas() {
   yield all([
     call(watchPin),
+    call(onSignUp),
+    call(onSignUpSuccess),
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
-    /* call(onSignInSuccess), */
     call(onSignOutStart),
   ]);
 }

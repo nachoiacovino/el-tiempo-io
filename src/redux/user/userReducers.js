@@ -6,6 +6,7 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_OUT_FAILED,
   SIGN_OUT_SUCCESS,
+  SIGN_UP_FAILED,
   UNPIN_MUNICIPALITY,
 } from './userConstants';
 
@@ -29,6 +30,7 @@ export const user = (state = initialState, { type, payload }) => {
         currentUser: null,
         error: null,
       };
+    case SIGN_UP_FAILED:
     case SIGN_IN_FAILED:
     case SIGN_OUT_FAILED:
       return {
