@@ -56,9 +56,10 @@ export const user = (state = initialState, { type, payload }) => {
         ),
       };
     case CLEAR_PINNED:
+      state.pinned.map((mnp) => addPinned(mnp, state.currentUser.id));
       return {
         ...state,
-        pinned: null,
+        pinned: [],
       };
     default:
       return state;

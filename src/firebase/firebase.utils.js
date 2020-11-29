@@ -39,11 +39,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-/* export const fetchPinned = async (userId) => {
-
-
-}; */
-
 export const addPinned = async (payload, userId) => {
   const pinnedCollection = firestore
     .doc(`users/${userId}`)

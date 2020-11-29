@@ -2,9 +2,8 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import { auth, createUserProfileDocument, googleProvider } from '../../firebase/firebase.utils';
 import { CLEAR_SELECTED } from '../constants';
-import { signInFailed } from './userActions';
+import { clearPinned, signInFailed } from './userActions';
 import {
-  CLEAR_PINNED,
   EMAIL_SIGN_IN_START,
   GOOGLE_SIGN_IN_START,
   PIN_MUNICIPALITY,
@@ -22,14 +21,6 @@ function* watchPin() {
   yield takeLatest(PIN_MUNICIPALITY, clearSelected);
 }
 
-function* clearPinned() {
-  yield put({ type: CLEAR_PINNED });
-}
-
-function* onSignInSuccess() {
-  yield takeLatest(SIGN_IN_SUCCESS, clearPinned);
-}
-
 function* getSnapshot(user) {
   try {
     const userRef = yield call(createUserProfileDocument, user);
@@ -38,6 +29,7 @@ function* getSnapshot(user) {
       type: SIGN_IN_SUCCESS,
       payload: { id: userSnapshot.id, ...userSnapshot.data() },
     });
+    yield put(clearPinned());
   } catch (error) {
     yield put(signInFailed());
   }
@@ -87,7 +79,7 @@ export default function* userSagas() {
     call(watchPin),
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
-    call(onSignInSuccess),
+    /* call(onSignInSuccess), */
     call(onSignOutStart),
   ]);
 }
