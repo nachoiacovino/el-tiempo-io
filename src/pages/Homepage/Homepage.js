@@ -47,6 +47,7 @@ const Homepage = () => {
     } else {
       dispatch(updatePinnedStart(pinned));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, dispatch]);
 
   useEffect(() => {
