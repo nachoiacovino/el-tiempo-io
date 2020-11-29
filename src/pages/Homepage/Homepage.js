@@ -9,6 +9,7 @@ import Loading from '../../components/Loading/Loading';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { firestore } from '../../firebase/firebase.utils';
 import { setRequestMnpsStart } from '../../redux/actions';
+import { updatePinnedStart } from '../../redux/user/userActions';
 
 const Homepage = () => {
   const [pinned, setPinned] = useState();
@@ -45,11 +46,14 @@ const Homepage = () => {
         .collection('pinned')
         .onSnapshot(handleSnapshot);
     } else {
+      dispatch(updatePinnedStart(pinnedStore));
       setPinned(pinnedStore);
     }
-  }, [currentUser, pinnedStore]);
+  }, [currentUser, dispatch]);
 
-  useEffect(() => dispatch(setRequestMnpsStart()), [dispatch]);
+  useEffect(() => {
+    dispatch(setRequestMnpsStart());
+  }, [dispatch]);
 
   useEffect(() => {
     setOptions(

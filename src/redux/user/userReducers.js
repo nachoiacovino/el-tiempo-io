@@ -8,6 +8,8 @@ import {
   SIGN_OUT_SUCCESS,
   SIGN_UP_FAILED,
   UNPIN_MUNICIPALITY,
+  UPDATE_PINNED_FAILED,
+  UPDATE_PINNED_SUCCESS,
 } from './userConstants';
 
 const initialState = {
@@ -33,6 +35,7 @@ export const user = (state = initialState, { type, payload }) => {
     case SIGN_UP_FAILED:
     case SIGN_IN_FAILED:
     case SIGN_OUT_FAILED:
+    case UPDATE_PINNED_FAILED:
       return {
         ...state,
         error: payload,
@@ -62,6 +65,11 @@ export const user = (state = initialState, { type, payload }) => {
       return {
         ...state,
         pinned: [],
+      };
+    case UPDATE_PINNED_SUCCESS:
+      return {
+        ...state,
+        pinned: payload,
       };
     default:
       return state;

@@ -22,16 +22,16 @@ function* setRequestMnpsAsync() {
   }
 }
 
-function* requestMunicipality(mnp) {
+export function* requestMunicipality(mnp) {
   const res = yield elTiempo.get(
-    `provincias/${mnp[0].codprov}/municipios/${mnp[0].codigoine.slice(0, 5)}`,
+    `provincias/${mnp.codprov}/municipios/${mnp.codigoine.slice(0, 5)}`,
   );
   return res.data;
 }
 
 function* setRequestSelectedAsync({ payload }) {
   try {
-    const data = yield requestMunicipality(payload);
+    const data = yield requestMunicipality(payload[0]);
     yield put({
       type: REQUEST_SELECTED_SUCCESS,
       payload: data,

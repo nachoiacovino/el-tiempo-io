@@ -8,6 +8,7 @@ import {
   SIGN_UP_START,
   SIGN_UP_SUCCESS,
   UNPIN_MUNICIPALITY,
+  UPDATE_PINNED_START,
 } from './userConstants';
 
 export const pinMunicipality = (payload) => ({
@@ -50,4 +51,9 @@ export const signInFailed = (error) => ({
 
 export const signOutStart = () => ({
   type: SIGN_OUT_START,
+});
+
+export const updatePinnedStart = (payload) => ({
+  type: UPDATE_PINNED_START,
+  payload,
 });

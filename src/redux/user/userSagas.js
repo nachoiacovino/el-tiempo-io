@@ -2,6 +2,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import { auth, createUserProfileDocument, googleProvider } from '../../firebase/firebase.utils';
 import { CLEAR_SELECTED } from '../constants';
+import { requestMunicipality } from '../sagas';
 import { clearPinned, signInFailed, signUpSuccess } from './userActions';
 import {
   EMAIL_SIGN_IN_START,
@@ -14,6 +15,9 @@ import {
   SIGN_UP_FAILED,
   SIGN_UP_START,
   SIGN_UP_SUCCESS,
+  UPDATE_PINNED_FAILED,
+  UPDATE_PINNED_START,
+  UPDATE_PINNED_SUCCESS,
 } from './userConstants';
 
 function* clearSelected() {
@@ -98,6 +102,28 @@ function* onSignOutStart() {
   yield takeLatest(SIGN_OUT_START, signOut);
 }
 
+function* updatePinned({ payload }) {
+  try {
+    const data = yield payload.map((mnp) => ({
+      codigoine: mnp.municipio.CODIGOINE,
+      codprov: mnp.municipio.CODPROV,
+    }));
+
+    const updated = [];
+    for (let i = 0; i < data.length; i++) {
+      const j = yield requestMunicipality(data[i]);
+      yield updated.push(j);
+    }
+    yield put({ type: UPDATE_PINNED_SUCCESS, payload: updated });
+  } catch (error) {
+    yield put({ type: UPDATE_PINNED_FAILED });
+  }
+}
+
+function* onUpdatePinnedStart() {
+  yield takeLatest(UPDATE_PINNED_START, updatePinned);
+}
+
 export default function* userSagas() {
   yield all([
     call(watchPin),
@@ -106,5 +132,6 @@ export default function* userSagas() {
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
     call(onSignOutStart),
+    call(onUpdatePinnedStart),
   ]);
 }
