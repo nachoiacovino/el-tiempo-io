@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "El tiempo",
+  "name": "El tiempo en España",
   "icons": [
     {
       "src": "favicon.ico",
