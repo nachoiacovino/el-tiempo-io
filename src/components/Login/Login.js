@@ -33,45 +33,47 @@ const Login = () => {
 
   return (
     <EuiFlexItem>
-      <EuiTitle>
-        <h2>¿Ya tienes cuenta?</h2>
-      </EuiTitle>
-      <EuiSpacer />
-      <EuiForm component="form" onSubmit={handleLogin}>
-        <EuiFormRow label="Email">
-          <EuiFieldText
-            placeholder="Email"
-            value={email}
-            prepend={<EuiIcon type="email" />}
-            onChange={setEmail}
-            aria-label="Email"
-          />
-        </EuiFormRow>
-        <EuiFormRow label="Contraseña">
-          <EuiFieldPassword
-            placeholder="Contraseña"
-            type={dual ? 'dual' : undefined}
-            value={password}
-            onChange={setPassword}
-            aria-label="Contraseña"
-          />
-        </EuiFormRow>
-
+      <div class="Login">
+        <EuiTitle>
+          <h2>¿Ya tienes cuenta?</h2>
+        </EuiTitle>
         <EuiSpacer />
+        <EuiForm component="form" onSubmit={handleLogin}>
+          <EuiFormRow label="Email">
+            <EuiFieldText
+              placeholder="Email"
+              value={email}
+              prepend={<EuiIcon type="email" />}
+              onChange={setEmail}
+              aria-label="Email"
+            />
+          </EuiFormRow>
+          <EuiFormRow label="Contraseña">
+            <EuiFieldPassword
+              placeholder="Contraseña"
+              type={dual ? 'dual' : undefined}
+              value={password}
+              onChange={setPassword}
+              aria-label="Contraseña"
+            />
+          </EuiFormRow>
 
-        <EuiFlexGrid columns={2}>
-          <EuiFlexItem>
-            <EuiButton type="submit" fill>
-              Entrar
-            </EuiButton>
-          </EuiFlexItem>
-          <EuiFlexItem>
-            <EuiButton fill type="button" onClick={handleLoginWithGoogle}>
-              Entrar con Google
-            </EuiButton>
-          </EuiFlexItem>
-        </EuiFlexGrid>
-      </EuiForm>
+          <EuiSpacer />
+
+          <EuiFlexGrid columns={2}>
+            <EuiFlexItem>
+              <EuiButton type="submit" fill>
+                Entrar
+              </EuiButton>
+            </EuiFlexItem>
+            <EuiFlexItem>
+              <EuiButton fill type="button" onClick={handleLoginWithGoogle}>
+                Entrar con Google
+              </EuiButton>
+            </EuiFlexItem>
+          </EuiFlexGrid>
+        </EuiForm>
+      </div>
     </EuiFlexItem>
   );
 };
