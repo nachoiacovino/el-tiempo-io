@@ -90,7 +90,7 @@ const Homepage = () => {
             <h2>Resultado de la búsqueda</h2>
           </EuiTitle>
           <EuiSpacer />
-          <Card mnp={selected} />
+          <Card mnp={selected} selected />
           <EuiSpacer />
         </>
       )}

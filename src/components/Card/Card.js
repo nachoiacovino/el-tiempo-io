@@ -3,9 +3,10 @@ import './Card.scss';
 import { EuiButtonIcon, EuiCard, EuiFlexItem, EuiHorizontalRule, EuiIcon } from '@elastic/eui';
 import { useDispatch } from 'react-redux';
 
+import { clearSelected } from '../../redux/actions';
 import { pinMunicipality, unpinMunicipality } from '../../redux/user/userActions';
 
-const Card = ({ mnp, pinned }) => {
+const Card = ({ mnp, pinned, selected }) => {
   const dispatch = useDispatch();
 
   const handlePin = (action, selected) => {
@@ -22,8 +23,16 @@ const Card = ({ mnp, pinned }) => {
   ) : (
     <EuiButtonIcon
       iconType="pin"
-      aria-label="Guardar"
+      aria-label="Guardar municipio"
       onClick={() => handlePin('PIN', mnp)}
+    />
+  );
+
+  const deleteButton = selected && (
+    <EuiButtonIcon
+      iconType="trash"
+      aria-label="Eliminar"
+      onClick={() => dispatch(clearSelected())}
     />
   );
 
@@ -33,7 +42,7 @@ const Card = ({ mnp, pinned }) => {
         className="Card"
         title={
           <>
-            {mnp.municipio.NOMBRE_CAPITAL} {buttonToShow}
+            {mnp.municipio.NOMBRE_CAPITAL} {buttonToShow} {deleteButton}
             <EuiHorizontalRule margin="xs" />
           </>
         }
