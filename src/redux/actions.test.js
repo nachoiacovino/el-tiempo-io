@@ -1,18 +1,29 @@
-/*import configureStore from 'redux-mock-store';
+import { clearSelected, setRequestMnpsStart, setRequestSelectedStart } from './actions';
+import { CLEAR_SELECTED, REQUEST_MUNICIPALITIES_PENDING, REQUEST_SELECTED_PENDING } from './constants';
 
-const mockStore = configureStore([]);
-
- describe('setRequestMunicipalities', () => {
-  const store = mockStore();
-
-  it('handles requesting municipalities from API', async () => {
-    await store.dispatch(setRequestMunicipalities());
-    const actions = store.getActions();
-
-    const expectedAction = {
-      type: REQUEST_MUNICIPALITIES_PENDING,
-    };
-    expect(actions[0]).toEqual(expectedAction);
-  });
+it('should create an action to request municipalities', () => {
+  const expectedAction = { type: REQUEST_MUNICIPALITIES_PENDING };
+  expect(setRequestMnpsStart()).toEqual(expectedAction);
 });
- */
+
+it('should create an action to request selected municipality', () => {
+  const mockMunicipality = {
+    id: '123',
+    codprov: '01',
+    codigoine: '01003000000',
+    municipio: { ID_REL: '456' },
+  };
+
+  const expectedAction = {
+    type: REQUEST_SELECTED_PENDING,
+    payload: mockMunicipality,
+  };
+  expect(setRequestSelectedStart(expectedAction.payload)).toEqual(
+    expectedAction,
+  );
+});
+
+it('should create an action to clear selected', () => {
+  const expectedAction = { type: CLEAR_SELECTED };
+  expect(clearSelected()).toEqual(expectedAction);
+});
