@@ -20,11 +20,11 @@ import {
   UPDATE_PINNED_SUCCESS,
 } from './userConstants';
 
-function* clearSelected() {
+export function* clearSelected() {
   yield put({ type: CLEAR_SELECTED });
 }
 
-function* watchPin() {
+export function* watchPin() {
   yield takeLatest(PIN_MUNICIPALITY, clearSelected);
 }
 
@@ -42,7 +42,7 @@ function* getSnapshot(user, additionalData) {
   }
 }
 
-function* signUp({ payload: { email, password, displayName } }) {
+export function* signUp({ payload: { email, password, displayName } }) {
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
     yield put(signUpSuccess({ user, additionalData: { displayName } }));
@@ -51,19 +51,19 @@ function* signUp({ payload: { email, password, displayName } }) {
   }
 }
 
-function* onSignUp() {
+export function* onSignUpStart() {
   yield takeLatest(SIGN_UP_START, signUp);
 }
 
-function* signInAfterSignUp({ payload: { user, additionalData } }) {
+export function* signInAfterSignUp({ payload: { user, additionalData } }) {
   yield getSnapshot(user, additionalData);
 }
 
-function* onSignUpSuccess() {
+export function* onSignUpSuccess() {
   yield takeLatest(SIGN_UP_SUCCESS, signInAfterSignUp);
 }
 
-function* signInWithGoogle() {
+export function* signInWithGoogle() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
     yield getSnapshot(user);
@@ -72,11 +72,11 @@ function* signInWithGoogle() {
   }
 }
 
-function* onGoogleSignInStart() {
+export function* onGoogleSignInStart() {
   yield takeLatest(GOOGLE_SIGN_IN_START, signInWithGoogle);
 }
 
-function* signInWithEmail({ payload: { email, password } }) {
+export function* signInWithEmail({ payload: { email, password } }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
     yield getSnapshot(user);
@@ -85,11 +85,11 @@ function* signInWithEmail({ payload: { email, password } }) {
   }
 }
 
-function* onEmailSignInStart() {
+export function* onEmailSignInStart() {
   yield takeLatest(EMAIL_SIGN_IN_START, signInWithEmail);
 }
 
-function* signOut() {
+export function* signOut() {
   try {
     yield auth.signOut();
     yield put({ type: SIGN_OUT_SUCCESS });
@@ -98,11 +98,11 @@ function* signOut() {
   }
 }
 
-function* onSignOutStart() {
+export function* onSignOutStart() {
   yield takeLatest(SIGN_OUT_START, signOut);
 }
 
-function* setUpdatePinned({ payload }) {
+export function* setUpdatePinned({ payload }) {
   try {
     let data;
 
@@ -127,14 +127,14 @@ function* setUpdatePinned({ payload }) {
   }
 }
 
-function* onUpdatePinnedStart() {
+export function* onUpdatePinnedStart() {
   yield takeLatest(UPDATE_PINNED_START, setUpdatePinned);
 }
 
 export default function* userSagas() {
   yield all([
     call(watchPin),
-    call(onSignUp),
+    call(onSignUpStart),
     call(onSignUpSuccess),
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
