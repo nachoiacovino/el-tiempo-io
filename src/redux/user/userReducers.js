@@ -12,7 +12,7 @@ import {
   UPDATE_PINNED_SUCCESS,
 } from './userConstants';
 
-const initialState = {
+export const initialState = {
   currentUser: null,
   pinned: [],
   error: null,

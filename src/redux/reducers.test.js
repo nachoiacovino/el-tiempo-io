@@ -6,22 +6,16 @@ import {
   REQUEST_SELECTED_PENDING,
   REQUEST_SELECTED_SUCCESS,
 } from './constants';
-import { requestMunicipalities, requestSelected } from './reducers';
+import { initialStateRequest, initialStateSelected, requestMunicipalities, requestSelected } from './reducers';
 
 describe('requestMunicipalities', () => {
-  const initialState = {
-    isPending: false,
-    municipalities: [],
-    error: null,
-  };
-
   it('should return the initial state', () => {
-    expect(requestMunicipalities(undefined, {})).toEqual(initialState);
+    expect(requestMunicipalities(undefined, {})).toEqual(initialStateRequest);
   });
 
   it('should handle REQUEST_MUNICIPALITIES_PENDING', () => {
     expect(
-      requestMunicipalities(initialState, {
+      requestMunicipalities(initialStateRequest, {
         type: REQUEST_MUNICIPALITIES_PENDING,
       }),
     ).toEqual({
@@ -41,7 +35,7 @@ describe('requestMunicipalities', () => {
     ];
 
     expect(
-      requestMunicipalities(initialState, {
+      requestMunicipalities(initialStateRequest, {
         type: REQUEST_MUNICIPALITIES_SUCCESS,
         payload: mockPayload,
       }),
@@ -56,7 +50,7 @@ describe('requestMunicipalities', () => {
     const mockPayload = 'error';
 
     expect(
-      requestMunicipalities(initialState, {
+      requestMunicipalities(initialStateRequest, {
         type: REQUEST_MUNICIPALITIES_FAILED,
         payload: mockPayload,
       }),
@@ -76,12 +70,12 @@ describe('requestSelected', () => {
   };
 
   it('should return the initial state', () => {
-    expect(requestSelected(undefined, {})).toEqual(initialState);
+    expect(requestSelected(undefined, {})).toEqual(initialStateSelected);
   });
 
   it('should handle REQUEST_SELECTED_PENDING', () => {
     expect(
-      requestSelected(initialState, {
+      requestSelected(initialStateSelected, {
         type: REQUEST_SELECTED_PENDING,
       }),
     ).toEqual({
@@ -101,7 +95,7 @@ describe('requestSelected', () => {
     ];
 
     expect(
-      requestSelected(initialState, {
+      requestSelected(initialStateSelected, {
         type: REQUEST_SELECTED_SUCCESS,
         payload: mockPayload,
       }),
@@ -116,7 +110,7 @@ describe('requestSelected', () => {
     const mockPayload = 'error';
 
     expect(
-      requestSelected(initialState, {
+      requestSelected(initialStateSelected, {
         type: REQUEST_SELECTED_FAILED,
         payload: mockPayload,
       }),

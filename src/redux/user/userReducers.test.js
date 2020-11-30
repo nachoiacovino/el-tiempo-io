@@ -10,15 +10,9 @@ import {
   UPDATE_PINNED_FAILED,
   UPDATE_PINNED_SUCCESS,
 } from './userConstants';
-import { user } from './userReducers';
+import { initialState, user } from './userReducers';
 
 describe('user', () => {
-  const initialState = {
-    currentUser: null,
-    pinned: [],
-    error: null,
-  };
-
   const mockMunicipality = {
     id: '123',
     codprov: '01',

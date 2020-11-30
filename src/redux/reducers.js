@@ -8,7 +8,7 @@ import {
   REQUEST_SELECTED_SUCCESS,
 } from './constants';
 
-const initialStateRequest = {
+export const initialStateRequest = {
   isPending: false,
   municipalities: [],
   error: null,
@@ -35,7 +35,7 @@ export const requestMunicipalities = (
   }
 };
 
-const initialStateSelected = {
+export const initialStateSelected = {
   isPending: false,
   selected: null,
   error: null,
