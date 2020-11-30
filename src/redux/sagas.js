@@ -10,7 +10,7 @@ import {
   REQUEST_SELECTED_SUCCESS,
 } from './constants';
 
-function* setRequestMnpsAsync() {
+export function* setRequestMnpsAsync() {
   try {
     const res = yield elTiempo.get('municipios');
     yield put({
@@ -29,7 +29,7 @@ export function* requestMunicipality(mnp) {
   return res.data;
 }
 
-function* setRequestSelectedAsync({ payload }) {
+export function* setRequestSelectedAsync({ payload }) {
   try {
     const data = yield requestMunicipality(payload[0]);
     yield put({
@@ -41,11 +41,11 @@ function* setRequestSelectedAsync({ payload }) {
   }
 }
 
-function* setRequestMunicipalities() {
+export function* setRequestMunicipalities() {
   yield takeLatest(REQUEST_MUNICIPALITIES_PENDING, setRequestMnpsAsync);
 }
 
-function* setRequestSelected() {
+export function* setRequestSelected() {
   yield takeLatest(REQUEST_SELECTED_PENDING, setRequestSelectedAsync);
 }
 
