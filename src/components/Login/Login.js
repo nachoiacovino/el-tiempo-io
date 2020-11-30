@@ -33,7 +33,7 @@ const Login = () => {
 
   return (
     <EuiFlexItem>
-      <div class="Login">
+      <div className="Login">
         <EuiTitle>
           <h2>¿Ya tienes cuenta?</h2>
         </EuiTitle>

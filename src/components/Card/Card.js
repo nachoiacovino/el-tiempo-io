@@ -1,6 +1,6 @@
 import './Card.scss';
 
-import { EuiButtonIcon, EuiCard, EuiFlexItem } from '@elastic/eui';
+import { EuiButtonIcon, EuiCard, EuiFlexItem, EuiHorizontalRule, EuiIcon } from '@elastic/eui';
 import { useDispatch } from 'react-redux';
 
 import { pinMunicipality, unpinMunicipality } from '../../redux/user/userActions';
@@ -34,15 +34,20 @@ const Card = ({ mnp, pinned }) => {
         title={
           <>
             {mnp.municipio.NOMBRE_CAPITAL} {buttonToShow}
+            <EuiHorizontalRule margin="xs" />
           </>
         }
-        description={
-          <>
-            Temperatura actual: {mnp.temperatura_actual}. Probabilidad de
-            lluvia: {mnp.lluvia}
-          </>
-        }
-      />
+        description={''}
+      >
+        <p className="mb-5">
+          <EuiIcon type="temperature" /> Temperatura actual:{' '}
+          <strong>{mnp.temperatura_actual}ºC</strong>
+        </p>
+        <p>
+          <EuiIcon type="cloudDrizzle" /> Probabilidad de lluvia:{' '}
+          <strong>{mnp.lluvia}%</strong>
+        </p>
+      </EuiCard>
     </EuiFlexItem>
   );
 };
