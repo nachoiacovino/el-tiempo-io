@@ -3,9 +3,9 @@ import toJson from 'enzyme-to-json';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import App from './App';
+import Loading from './Loading';
 
-it('should render App component', () => {
+it('should render Loading component', () => {
   const mockStore = configureStore([]);
   const store = mockStore();
 
@@ -13,7 +13,7 @@ it('should render App component', () => {
     toJson(
       shallow(
         <Provider store={store}>
-          <App />
+          <Loading />
         </Provider>,
       ),
     ),
