@@ -6,5 +6,7 @@ import '@testing-library/jest-dom';
 
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { configure } from 'enzyme';
+import configureMockStore from 'redux-mock-store';
 
 configure({ adapter: new Adapter() });
+export const mockStore = configureMockStore([]);

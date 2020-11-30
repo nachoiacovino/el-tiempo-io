@@ -1,12 +1,11 @@
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 
 import App from './App';
+import { mockStore } from './setupTests';
 
 it('should render App component', () => {
-  const mockStore = configureStore([]);
   const store = mockStore();
 
   expect(
